@@ -2,14 +2,14 @@
 ## Create Database by the name of "CST8257"
 ## Run the script to create all the tables
 
+DROP TABLE IF EXISTS CST8257.Comments;
 DROP TABLE IF EXISTS CST8257.Friendship;
 DROP TABLE IF EXISTS CST8257.Picture;
 DROP TABLE IF EXISTS CST8257.Album;
 DROP TABLE IF EXISTS CST8257.Users;
 DROP TABLE IF EXISTS CST8257.Accessibility;
-DROP TABLE IF EXISTS CST8257.Comments;
 DROP TABLE IF EXISTS CST8257.FriendshipStatus;
-DROP TABLE IF EXISTS CST8257.Friendship;
+
 
 
 
