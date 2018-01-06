@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 Windjy Jean, Sarah Liu, Faizan Alam
 CST8257 - Web Applications Development
 PHP Social Media Project
 -->
-
 <html>
     <head>
         <meta charset="UTF-8">
