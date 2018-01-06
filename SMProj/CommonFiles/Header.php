@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -10,8 +10,8 @@ and open the template in the editor.
         <title>Online Course Registration</title>
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href=".css/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href=".css/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
+        <link href="../SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
     </head>
     <body style="padding-top: 50px; margin-bottom: 60px;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -26,17 +26,17 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" style="padding: 10px" href="http://www.algonquincollege.com">
-                        <img src=".css/Contents/img/AC.png" 
+                        <img src="../SiteResources/Contents/img/AC.png" 
                              alt="Algonquin College" style="max-width:100%; max-height:100%;"/>
                     </a>    
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="Index.php">Home </a></li>
-                        <li><a href="Disclaimer.php">Terms and Conditions</a></li>
-                        <li><a href="CustomerInfo.php">Customer Information</a></li>
-                        <li><a href="DepositCalculator.php">Calculator</a></li>
-                        <li><a href="Complete.php">Complete</a></li>          
+                        <li class="active"><a href="Index.php">Home</a></li>
+                        <li><a href="../MyFriends.php">My Friends</a></li>
+                        <li><a href="../MyAlbums.php">My Albums</a></li>
+                        <li><a href="../UploadPictures.php">Upload Pictures</a></li>
+                        <li><a href="../Login.php">Log In</a></li>          
                     </ul>
                 </div>
             </div>  
