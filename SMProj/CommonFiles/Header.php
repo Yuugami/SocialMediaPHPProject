@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<?php include_once ("DirectorySettings.php") ?>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -6,13 +7,15 @@ and open the template in the editor.
 -->
 
 <html lang="en" style="position: relative; min-height: 100%;">
-    <head>
-        <title>Online Course Registration</title>
-        <meta charset="utf-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
-    </head>
+<head>
+    <title>Online Course Registration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="/SocialMediaPHPProject/SMProj/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/SocialMediaPHPProject/SMProj/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css" />-->
+    <link href="/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css" />
+</head>
     <body style="padding-top: 50px; margin-bottom: 60px;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
             <div class="container-fluid">
@@ -33,10 +36,10 @@ and open the template in the editor.
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="Index.php">Home</a></li>
-                        <li><a href="../MyFriends.php">My Friends</a></li>
-                        <li><a href="../MyAlbums.php">My Albums</a></li>
-                        <li><a href="../UploadPictures.php">Upload Pictures</a></li>
-                        <li><a href="../Login.php">Log In</a></li>          
+                        <li><a href="/MyFriends.php">My Friends</a></li>
+                        <li><a href="/MyAlbums.php">My Albums</a></li>
+                        <li><a href="/UploadPictures.php">Upload Pictures</a></li>
+                        <li><a href="/Login.php">Log In</a></li>          
                     </ul>
                 </div>
             </div>  
