@@ -10,8 +10,8 @@ and open the template in the editor.
         <title>Online Course Registration</title>
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
+        <link href="/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
     </head>
     <body style="padding-top: 50px; margin-bottom: 60px;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
