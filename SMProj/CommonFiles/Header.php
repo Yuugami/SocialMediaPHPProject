@@ -10,8 +10,8 @@ and open the template in the editor.
         <title>Online Course Registration</title>
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/SocialMediaPHPProject/SMProj/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/SocialMediaPHPProject/SMProj/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
+        <link href="/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css"/>
     </head>
     <body style="padding-top: 50px; margin-bottom: 60px;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -26,7 +26,7 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" style="padding: 10px" href="http://www.algonquincollege.com">
-                        <img src="/SocialMediaPHPProject/SMProj/SiteResources/Contents/img/AC.png" 
+                        <img src="/SiteResources/Contents/img/AC.png" 
                              alt="Algonquin College" style="max-width:100%; max-height:100%;"/>
                     </a>    
                 </div>
