@@ -36,6 +36,7 @@ and open the template in the editor.
                         <li class="active"><a href="<?php echo $directoryPrefix; ?>/Index.php">Home</a></li>
                         <li><a href="<?php echo $directoryPrefix; ?>/MyFriends.php">My Friends</a></li>
                         <li><a href="<?php echo $directoryPrefix; ?>/MyAlbums.php">My Albums</a></li>
+                        <li><a href="<?php echo $directoryPrefix; ?>/MyPictures.php">My Pictures</a></li>
                         <li><a href="<?php echo $directoryPrefix; ?>/UploadPictures.php">Upload Pictures</a></li>
                         <li><a href="<?php echo $directoryPrefix; ?>/Login.php">Log In</a></li>          
                     </ul>
