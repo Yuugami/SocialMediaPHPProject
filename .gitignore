@@ -296,3 +296,4 @@ __pycache__/
 *.xsd.cs
 /SMProj/AlgCommon/nbproject/private/
 /SMProj/css/nbproject/private/
+SMProj/CommonFiles/DirectorySettings.php
