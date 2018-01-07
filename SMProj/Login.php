@@ -27,20 +27,5 @@ and open the template in the editor.
             <input type="reset" name="btnReset" class="col-lg-2 mb-2 btn btn-primary" value="Reset" />
         </form>
     </div>
-
-    <!--<div class="dataEntryContainer">
-                <span>User ID:</span>
-                <input type="text" name="name" value="" />
-                <br />
-                <br />
-                <span>Password:</span>
-                <input type="text" name="name" value="" />
-                <br />
-                <br />
-                <div class="formButtons">
-                    <input type="submit" name="name" value="Submit" />
-                    <input type="reset" name="name" value="Clear" />
-                </div>
-            </div>-->
     <?php include ("./CommonFiles/Footer.php"); ?>
 </body>
