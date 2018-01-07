@@ -3,12 +3,18 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<?php
+    // If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
+    //$LoggedInUser = isset($_SESSION["LoggedInUser"]) ? $_SESSION["LoggedInUser"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
+?>
+
 <body>
     <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
         <h1>Log In</h1>
         <p>You need to <a href="<?php echo $directoryPrefix; ?>/NewUser.php">sign up</a> if you're a new user.</p>
-        <form class="form-horizontal" id="loginForm" action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <form class="form-horizontal" id="loginForm" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
             <div class="form-group">
                 <label for="inputUserID" class="col-lg-2 control-label" style="text-align: left">User ID:</label>
                 <div class="col-lg-3">
