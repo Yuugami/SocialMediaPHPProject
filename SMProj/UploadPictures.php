@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Windjy Jean, Sarah Liu, Faizan Alam
+CST8257 - Web Applications Development
+PHP Social Media Project
 -->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -12,7 +13,7 @@ and open the template in the editor.
     <body>
         <?php include ("./CommonFiles/Header.php"); ?>
         <div class="container">
-            <h1>Upload Pictures</h1>
+            <h1 style="text-align: center">Upload Pictures</h1>
             <p>Accepted picture types: JPG(JPEG), GIF, PNG</p>
             <p class="mb-5">You can upload multiple pictures at a time by pressing the shift key while selecting pictures</p>
             
@@ -63,13 +64,16 @@ and open the template in the editor.
                         <textarea class="form-control" id="description" rows="3"></textarea>
                     </div>
                 </div>
+                <br>
                 <input type="submit" name="btnUpload" class="col-md-2 mb-2 btn btn-primary" />
+                <br>
+                <br>
+                <br>
             </form>
-            
-            
-                <div class="col-lg-5 text-danger">
-                    <?php echo $error ?>
-                </div> 
+                        
+            <div class="col-lg-5 text-danger">
+                <?php echo $error ?>
+            </div>
         </div>
         <?php include ("./CommonFiles/Footer.php"); ?>
     </body>
