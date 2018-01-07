@@ -7,7 +7,7 @@ PHP Social Media Project
 
 <body>
     <?php include ("./CommonFiles/Header.php"); ?>
-    <div class="col-lg-8">
+    <div class="container col-lg-8">
         <h1 style="text-align: center">Sign Up</h1>
         <p class="col-lg-offset-1">All fields are required.</p><br>
 
