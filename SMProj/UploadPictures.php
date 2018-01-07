@@ -32,6 +32,9 @@ and open the template in the editor.
                             <option>5</option>
                         </select>
                     </div>
+                    <span class="col-lg-5 text-danger">
+                        Album dropdown error field
+                    </span>
                 </div>
 
                 <div class="form-group row">
@@ -39,6 +42,9 @@ and open the template in the editor.
                     <div class="col-lg-4">
                         <input type="file" class="form-control" name="txtUpload[]" accept="image/gif, image/jpeg, image/png" multiple />
                     </div>
+                    <span class="col-lg-5 text-danger">
+                        Upload Picture error field
+                    </span>
                 </div>
                 
                 <div class="form-group row">
@@ -46,6 +52,9 @@ and open the template in the editor.
                     <div class="col-lg-4">
                         <input class="form-control" type="text" value="" id="example-text-input">
                     </div>
+                    <span class="col-lg-5 text-danger">
+                        Title error field
+                    </span>
                 </div>
                 
                 <div class="form-group row">
@@ -60,7 +69,7 @@ and open the template in the editor.
             
                 <div class="col-lg-5 text-danger">
                     <?php echo $error ?>
-                </div>  
+                </div> 
         </div>
         <?php include ("./CommonFiles/Footer.php"); ?>
     </body>
