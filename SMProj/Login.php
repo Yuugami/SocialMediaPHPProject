@@ -5,24 +5,26 @@ and open the template in the editor.
 -->
 <body>
     <?php include ("./CommonFiles/Header.php"); ?>
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3"><h1>Log In</h1></div>
+        <div class="col-sm-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-1">You need to <a href="<?php echo $directoryPrefix; ?>/NewUser.php">sign up</a> if you're a new user.</div>
+        <div class="col-sm-8"></div>
+    </div>
+    <br />
 
-    <h1>Log In</h1>
-    <div class="wrapper">
-        <p class="col-sm-3 col-sm-offset-1 control-label">
-            You need to
-            <a href="#">sign up</a>
-            if you're a new user.
-        </p>
-        <form class="form-horizontal" id="loginForm" action="/" method="post">
-            <div class="form-group">
-                <label for="name" class="col-sm-3 col-sm-offset-1 control-label" style="text-align: left">Student ID:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="name" name="studentid" value="<?php echo $studentid; ?>" />
-                </div>
-                <div class="col-sm-4 text-danger">
-                    <?php echo $studenterrormsg ?>
-                </div>
+    <form class="form-horizontal" id="loginForm" action="/" method="post">
+        <div class="form-group">
+            <label for="inputUserID" class="col-sm-3 col-sm-offset-1 control-label" style="text-align: left">User ID:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputUserID" name="name" placeholder="User ID" />
             </div>
+            <div class="col-sm-4 text-danger"></div>
+        </div>
+    </form>
+
             <!--<div class="dataEntryContainer">
                 <span>User ID:</span>
                 <input type="text" name="name" value="" />
@@ -37,7 +39,5 @@ and open the template in the editor.
                     <input type="reset" name="name" value="Clear" />
                 </div>
             </div>-->
-        </form>
-    </div>
     <?php include ("./CommonFiles/Footer.php"); ?>
 </body>
