@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CommonFiles\" />
+    <Folder Include="Images\" />
     <Folder Include="SiteResources\" />
     <Folder Include="SiteResources\Contents\" />
     <Folder Include="SiteResources\Contents\AlgCss\" />
