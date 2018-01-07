@@ -56,6 +56,7 @@ and open the template in the editor.
                 </div>
                 
                 <div class="clearfix"></div>
+                
             </form>
         </div>
         <?php include ("./CommonFiles/Footer.php"); ?>
