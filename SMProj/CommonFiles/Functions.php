@@ -4,7 +4,10 @@
 
 function ValidateStudentID($studentid) {
     if (trim($studentid) && isset($studentid)) {
-        
+        if (checkUserId($studentid) == false) {
+        } else {
+            return "Student ID Already Exists";
+        }
     } else {
         return "Student ID Required";
     }
