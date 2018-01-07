@@ -12,7 +12,6 @@ function loginQuery($UserId, $Password) {
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('userId' => $UserId, 'password' => $Password));
     $data = $pStatment->fetch();
-
     if ($data)
         return $data;
     else
@@ -32,15 +31,12 @@ function checkUserId($UserId){
 }
 
 function CreateAlbum($title, $description, $date, $ownerId, $accessibility){
-    
     $myPdo = connectToDb();
-    
     $sql = "INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES (:title, :description, :date, :ownerId, :accessibility)";
-
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('title' => $title, 'description' => $description, 'date' => $date, 'ownerId' => $ownerId, 'accessibility' => $accessibility));
     $data = $pStatment->fetch();
-
     return $myPdo->lastInsertId();
 }
+
 ?>
