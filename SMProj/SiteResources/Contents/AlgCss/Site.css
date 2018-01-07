@@ -43,44 +43,9 @@ and open the template in the editor.
 
 /* Login.php */
 
-/*h1 {
-    text-align: center;
+input[name=btnLogin] {
+    margin-right: 5px;
 }
-
-.wrapper { 
-    display: block;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.dataEntryContainer {
-    width: 30%;
-}
-
-.dataEntryContainer span {
-    font-weight: bold;
-}
-
-input[type=text], .formButtons {
-    float: right;
-}
-
-.formButtons {
-    margin-top: 10px;
-}
-
-.formButtons input { 
-    border: none;
-    border-radius: 3px;
-    padding: 5px 20px;
-
-    color: white;
-    background: #5555AA;
-
-    font-size: 1.3em;
-}*/
-
-
 
 /* Faizan's CSS Section*/
 

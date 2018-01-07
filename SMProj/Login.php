@@ -5,27 +5,30 @@ and open the template in the editor.
 -->
 <body>
     <?php include ("./CommonFiles/Header.php"); ?>
-    <div class="row">
-        <div class="col-sm-5 col-sm-offset-3"><h1>Log In</h1></div>
-        <div class="col-sm-4"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3 col-sm-offset-1">You need to <a href="<?php echo $directoryPrefix; ?>/NewUser.php">sign up</a> if you're a new user.</div>
-        <div class="col-sm-8"></div>
-    </div>
-    <br />
-
-    <form class="form-horizontal" id="loginForm" action="/" method="post">
-        <div class="form-group">
-            <label for="inputUserID" class="col-sm-3 col-sm-offset-1 control-label" style="text-align: left">User ID:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="inputUserID" name="name" placeholder="User ID" />
+    <div class="container">
+        <h1>Log In</h1>
+        <p>You need to <a href="<?php echo $directoryPrefix; ?>/NewUser.php">sign up</a> if you're a new user.</p>
+        <form class="form-horizontal" id="loginForm" action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <div class="form-group">
+                <label for="inputUserID" class="col-lg-2 control-label" style="text-align: left">User ID:</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" id="inputUserID" name="id" placeholder="User ID" />
+                </div>
+                <div class="col-lg-4 text-danger"></div>
             </div>
-            <div class="col-sm-4 text-danger"></div>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label" style="text-align: left">Password:</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Password" />
+                </div>
+                <div class="col-lg-4 text-danger"></div>
+            </div>
+            <input type="submit" name="btnLogin" class="col-lg-2 mb-2 btn btn-primary" value="Log In" />
+            <input type="reset" name="btnReset" class="col-lg-2 mb-2 btn btn-primary" value="Reset" />
+        </form>
+    </div>
 
-            <!--<div class="dataEntryContainer">
+    <!--<div class="dataEntryContainer">
                 <span>User ID:</span>
                 <input type="text" name="name" value="" />
                 <br />
