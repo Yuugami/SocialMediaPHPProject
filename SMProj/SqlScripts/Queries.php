@@ -31,12 +31,33 @@ function checkUserId($UserId){
 }
 
 function CreateAlbum($title, $description, $date, $ownerId, $accessibility){
+
+// Return 0 if OwnerId doesnot exist
+// Return -1 if Accessibility_Code does not exist
+// Does Insert and returns AlbumId if successfull
+    
     $myPdo = connectToDb();
+    
+    $sql = 'SELECT UserId FROM Users WHERE UserId = :userId';
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('userId' => $ownerId));
+    $data = $pStatment->fetch();
+    if(!$data){
+        return 0;
+    }
+    
+    $sql = 'SELECT Accessibility_Code FROM Accessibility WHERE Accessibility_Code = :accessibility';
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('accessibility' => $accessibility));
+    $data = $pStatment->fetch();
+    if(!$data){
+        return -1;
+    }
+    
     $sql = "INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES (:title, :description, :date, :ownerId, :accessibility)";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('title' => $title, 'description' => $description, 'date' => $date, 'ownerId' => $ownerId, 'accessibility' => $accessibility));
-    $data = $pStatment->fetch();
+
     return $myPdo->lastInsertId();
 }
-
 ?>
