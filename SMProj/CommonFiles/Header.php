@@ -1,5 +1,5 @@
 <?php include_once ("DirectorySettings.php") ?>
-<?php session_start();?>
+<?php include_once ("$directoryPrefix/IncludeAll.php"); ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
