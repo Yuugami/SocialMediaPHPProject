@@ -1,5 +1,5 @@
 <?php include_once ("DirectorySettings.php") ?>
-<?php include_once("SqlScripts/Queries.php"); ?>
+<?php include_once ("IncludeAll.php"); ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
