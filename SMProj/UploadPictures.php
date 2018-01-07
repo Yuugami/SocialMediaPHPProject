@@ -10,8 +10,46 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <?php include ("./CommonFiles/Header.php"); ?>
+        <div class="container">
+            <h1>Upload Pictures</h1>
+            <p>Accepted picture types: JPG(JPEG), GIF, PNG</p>
+            <p class="mb-5">You can upload multiple pictures at a time by pressing the shift key while selecting pictures</p>
+            
+            <form action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+                <p>Accepted picture types: JPG(JPEG), GIF, PNG</p>
+                <p>You can upload multiple picture at a time by pressing shift key while selecting pictures</p>
+                <p>When uploading multiple pictures, the tile and description fields will be applied to all pictures.</p>
+                
+                
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-lg-2 col-form-label">Upload Pictures</label>
+                    <div class="col-lg-4">
+                        <input type="file" class="form-control" name="txtUpload[]" accept="image/gif, image/jpeg, image/png" multiple />
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-lg-2 col-form-label">Title:</label>
+                    <div class="col-lg-4">
+                        <input class="form-control" type="text" value="" id="example-text-input">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="exampleTextarea" class="col-lg-2 col-form-label">Description</label>
+                    <div class="col-lg-4">
+                        <textarea class="form-control" id="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <input type="submit" name="btnUpload" class="col-md-2 mb-2 btn btn-primary" />
+            </form>
+
+                <div class="col-sm-4 text-danger">
+                    <?php echo $error ?>
+                </div>  
+
+        </div>
+        <?php include ("./CommonFiles/Footer.php"); ?>
     </body>
 </html>
