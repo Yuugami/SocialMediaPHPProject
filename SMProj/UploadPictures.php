@@ -20,10 +20,22 @@ and open the template in the editor.
                 <p>Accepted picture types: JPG(JPEG), GIF, PNG</p>
                 <p>You can upload multiple picture at a time by pressing shift key while selecting pictures</p>
                 <p>When uploading multiple pictures, the tile and description fields will be applied to all pictures.</p>
-                
-                
+                <br />
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-lg-2 col-form-label">Upload Pictures</label>
+                    <label for="albums" class="col-lg-2">Album:</label>
+                    <div class="col-lg-4">
+                        <select class="form-control" id="albums">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-lg-2 col-form-label">Upload Pictures:</label>
                     <div class="col-lg-4">
                         <input type="file" class="form-control" name="txtUpload[]" accept="image/gif, image/jpeg, image/png" multiple />
                     </div>
@@ -44,11 +56,11 @@ and open the template in the editor.
                 </div>
                 <input type="submit" name="btnUpload" class="col-md-2 mb-2 btn btn-primary" />
             </form>
-
-                <div class="col-sm-4 text-danger">
+            
+            
+                <div class="col-lg-5 text-danger">
                     <?php echo $error ?>
                 </div>  
-
         </div>
         <?php include ("./CommonFiles/Footer.php"); ?>
     </body>
