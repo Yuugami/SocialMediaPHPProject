@@ -11,15 +11,13 @@ DROP TABLE IF EXISTS CST8257.Accessibility;
 DROP TABLE IF EXISTS CST8257.FriendshipStatus;
 
 
-
-
 CREATE TABLE CST8257.Users (
    	UserId varchar(16) NOT NULL PRIMARY KEY,
    	Name varchar(256) NOT NULL,
    	Phone varchar(16),
    	Password varchar(256)
-
 );
+
 CREATE TABLE CST8257.Accessibility (
 	Accessibility_Code varchar(16) NOT NULL PRIMARY KEY,
   	Description varchar(127) NOT NULL
@@ -46,7 +44,6 @@ CREATE TABLE CST8257.Picture (
 	FOREIGN KEY (Album_Id) REFERENCES Album (Album_Id)
 );
 
-
 CREATE TABLE CST8257.Comments (
 	Comment_Id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	Author_Id varchar(16) NOT NULL,
@@ -61,6 +58,7 @@ CREATE TABLE CST8257.FriendshipStatus (
 	Status_Code varchar(16) NOT NULL PRIMARY KEY,
 	Description varchar(128) NOT NULL
 );
+
 CREATE TABLE CST8257.Friendship (
 	Friend_RequesterId varchar(16) NOT NULL,
 	Friend_RequesteeId varchar(16) NOT NULL,
