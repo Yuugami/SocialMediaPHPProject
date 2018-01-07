@@ -8,7 +8,7 @@ and open the template in the editor.
 
 <html lang="en" style="position: relative; min-height: 100%;">
 <head>
-    <title>Algonquin Social Media</title>
+    <title>Algonquin Social Media Website</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo $directoryPrefix; ?>/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
