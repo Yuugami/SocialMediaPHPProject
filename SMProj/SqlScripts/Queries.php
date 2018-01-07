@@ -1,9 +1,13 @@
 <?php
 // Login Query function
-function loginQuery($UserId, $Password) {
+function connectToDb(){
     $dbConnection = parse_ini_file("db_connection.ini");
     extract($dbConnection);
-    $myPdo = new PDO($dsn, $user, $password);
+    return new PDO($dsn, $user, $password);;
+}
+
+function loginQuery($UserId, $Password) {
+    $myPdo = connectToDb();
     $sql = 'SELECT UserId, Name FROM Users WHERE UserId = :userId AND Password = :password';
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('userId' => $UserId, 'password' => $Password));
@@ -16,9 +20,7 @@ function loginQuery($UserId, $Password) {
 }
 
 function checkUserId($UserId){
-    $dbConnection = parse_ini_file("db_connection.ini");
-    extract($dbConnection);
-    $myPdo = new PDO($dsn, $user, $password);
+    $myPdo = connectToDb();
     $sql = 'SELECT Name FROM Users WHERE UserId = :userId';
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('userId' => $UserId));
@@ -31,9 +33,7 @@ function checkUserId($UserId){
 
 function CreateAlbum($title, $description, $date, $ownerId, $accessibility){
     
-    $dbConnection = parse_ini_file("db_connection.ini");
-    extract($dbConnection);
-    $myPdo = new PDO($dsn, $user, $password);
+    $myPdo = connectToDb();
     
     $sql = "INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES (:title, :description, :date, :ownerId, :accessibility)";
 
@@ -42,7 +42,5 @@ function CreateAlbum($title, $description, $date, $ownerId, $accessibility){
     $data = $pStatment->fetch();
 
     return $myPdo->lastInsertId();
-    
 }
-
 ?>
