@@ -1,25 +1,28 @@
+<?php include ("./CommonFiles/Header.php"); ?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Windjy Jean, Sarah Liu, Faizan Alam
+CST8257 - Web Applications Development
+PHP Social Media Project
 -->
-
+<?php
+// If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
+$LoggedInUser = isset($_SESSION["LoggedInUserId"]) ? $_SESSION["LoggedInUserId"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
+?>
 <body>
-    <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
         <h1 class="text-center">My Friends</h1>
         <br>
         <p class="text-center">
-            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>!
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <br>
         <form class="form-horizontal" id="defriendForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <table class="table table-striped">
                 <thead class="thead-inverse">
-                    <th>Name</th>
-                    <th>Shared Albums</th>
-                    <th>Unfriend</th>
+                <th>Name</th>
+                <th>Shared Albums</th>
+                <th>Unfriend</th>
                 </thead>
                 <tr>
                     <td>John Smith</td>
@@ -43,8 +46,8 @@ and open the template in the editor.
         <form class="form-horizontal" id="friendRequestForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <table class="table table-striped">
                 <thead class="thead-inverse">
-                    <th>Name</th>
-                    <th>Accept</th>
+                <th>Name</th>
+                <th>Accept</th>
                 </thead>
                 <tr>
                     <td>Mary Johnson</td>
@@ -67,6 +70,5 @@ and open the template in the editor.
             <div class="clearfix"></div>
 
         </form>
-    </div>
-    <?php include ("./CommonFiles/Footer.php"); ?>
+    </div><?php include ("./CommonFiles/Footer.php"); ?>
 </body>

@@ -4,7 +4,6 @@ Windjy Jean, Sarah Liu, Faizan Alam
 CST8257 - Web Applications Development
 PHP Social Media Project
 -->
-
 <body>
     <?php include ("./CommonFiles/Header.php");
     

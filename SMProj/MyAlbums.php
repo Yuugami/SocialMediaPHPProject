@@ -1,16 +1,19 @@
-
+<?php include ("./CommonFiles/Header.php"); ?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Windjy Jean, Sarah Liu, Faizan Alam
+CST8257 - Web Applications Development
+PHP Social Media Project
 -->
+<?php
+// If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
+$LoggedInUser = isset($_SESSION["LoggedInUserId"]) ? $_SESSION["LoggedInUserId"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
+?>
 <body>
-    <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
         <h1 style="text-align: center">My Albums</h1>
         <br>
         <p class="text-center">
-            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>!
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <br>
@@ -21,26 +24,24 @@ and open the template in the editor.
                 <th>Number of Pictures</th>
                 <th>Accessibility</th>
                 <th></th>
-            </tr>
-            <?php
+            </tr>            <?php
             // Print All Albums
             for ($i = 0; $i <= 5; $i++) {
-                echo <<< EOT
-                <tr>
-                <td>My China Trip</td>
-                <td>2017-09-04</td>
-                <td>14</td>
-                <td>
-                    <select class="form-control" id="accessibility" name="accessibility" value="<?php echo $accessibility; ?>">
-                        <option style="display:none">Please Select Number of Years</option>
-                        <option value="private">Accessible Only by Owner</option>
-                        <option value="shared">Accessible by Owner and Friends</option>
-                    </select>
-                <td><a href="#">delete</a></td>
+            echo <<< EOT
+            <tr>
+            <td>My China Trip</td>
+            <td>2017-09-04</td>
+            <td>14</td>
+            <td>
+            <select class="form-control" id="accessibility" name="accessibility" value="<?php echo $accessibility; ?>">
+            <option style="display:none">Please Select Number of Years</option>
+            <option value="private">Accessible Only by Owner</option>
+            <option value="shared">Accessible by Owner and Friends</option>
+            </select>
+            <td><a href="#">delete</a></td>
 EOT;
             }
             ?>
         </table>
-    </div>
-    <?php include ("./CommonFiles/Footer.php"); ?>
+    </div><?php include ("./CommonFiles/Footer.php"); ?>
 </body>

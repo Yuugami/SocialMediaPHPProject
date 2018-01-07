@@ -1,11 +1,14 @@
-
+<?php include ("./CommonFiles/Header.php"); ?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Windjy Jean, Sarah Liu, Faizan Alam
+CST8257 - Web Applications Development
+PHP Social Media Project
 -->
+<?php
+// If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
+$LoggedInUser = isset($_SESSION["LoggedInUserId"]) ? $_SESSION["LoggedInUserId"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
+?>
 <body>
-    <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
         <h1><?php $friend?>'s Pictures</h1>
         <select class="form-control" id="albums" name="albums" value="<?php echo $album; ?>">
