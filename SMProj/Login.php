@@ -38,7 +38,7 @@ if ($_POST) {
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label" style="text-align: left">Password:</label>
                 <div class="col-lg-3">
-                    <input type="text" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password" />
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password" />
                 </div>
                 <div class="col-lg-4 text-danger"></div>
             </div>

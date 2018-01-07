@@ -22,6 +22,7 @@
     <Compile Include="CommonFiles\Footer.php" />
     <Compile Include="CommonFiles\Functions.php" />
     <Compile Include="CommonFiles\Header.php" />
+    <Compile Include="CommonFiles\IncludeAll.php" />
     <Compile Include="FriendPictures.php" />
     <Compile Include="index.php" />
     <Compile Include="Login.php" />
@@ -30,6 +31,7 @@
     <Compile Include="MyFriends.php" />
     <Compile Include="MyPictures.php" />
     <Compile Include="NewUser.php" />
+    <Compile Include="SqlScripts\Queries.php" />
     <Compile Include="UploadPictures.php" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +70,8 @@
     <Content Include="SiteResources\nbproject\project.properties" />
     <Content Include="SiteResources\nbproject\project.xml" />
     <Content Include="SiteResources\Scripts\jquery-2.2.4.min.js" />
+    <Content Include="SqlScripts\Data.sql" />
+    <Content Include="SqlScripts\db_connection.ini" />
     <Content Include="SqlScripts\sql.sql" />
   </ItemGroup>
 </Project>
