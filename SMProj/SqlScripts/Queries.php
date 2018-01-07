@@ -29,4 +29,20 @@ function checkUserId($UserId){
         return FALSE; // If User does not exist
 }
 
+function CreateAlbum($title, $description, $date, $ownerId, $accessibility){
+    
+    $dbConnection = parse_ini_file("db_connection.ini");
+    extract($dbConnection);
+    $myPdo = new PDO($dsn, $user, $password);
+    
+    $sql = "INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES (:title, :description, :date, :ownerId, :accessibility)";
+
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('title' => $title, 'description' => $description, 'date' => $date, 'ownerId' => $ownerId, 'accessibility' => $accessibility));
+    $data = $pStatment->fetch();
+
+    return $myPdo->lastInsertId();
+    
+}
+
 ?>
