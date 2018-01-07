@@ -10,7 +10,7 @@ session_unset();
 session_destroy();
 
 // Redirect to Index.php
-header("Location: index.php");
+header("Location: Login.php");
 die();
 ?>
 
