@@ -1,3 +1,7 @@
+## Project Files
+/SMProj/Images/
+/SMProj/SqlScripts/db_connection.ini
+
 # Netbeans .gitignore
 nbproject/private/
 build/
@@ -299,8 +303,3 @@ __pycache__/
 SMProj/CommonFiles/DirectorySettings.php
 SMProj/SqlScripts/db_connection.ini
 SMProj/SqlScripts/testdb.php
-
-
-
-## Project Files
-/SMProj/Images/
