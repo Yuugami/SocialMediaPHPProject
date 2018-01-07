@@ -4,7 +4,6 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
 <?php
     // If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
     //$LoggedInUser = isset($_SESSION["LoggedInUser"]) ? $_SESSION["LoggedInUser"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
@@ -16,13 +15,21 @@ if ($_POST) {
     $password = $_POST["inputPassword"];
 
     // Connect to DB
-    loginQuery($studentID, $password);
+    $info = loginQuery($studentID, $password);
 
     // Parse the Info
-    $loginError = true;
+    $loginError = false;
+
+    if ($info) {
+        $_SESSION["LoggedInUserId"] = $info["UserId"];
+        $_SESSION["LoggedInUserName"] = $info["Name"];
+        header("Location: index.php");
+    }
+    else {
+        $loginError = true;
+    }
 }
 ?>
-
 <body>
     <div class="container">
         <h1>Log In</h1>
@@ -33,15 +40,22 @@ if ($_POST) {
                 <div class="col-lg-3">
                     <input type="text" class="form-control" id="inputUserID" name="inputUserID" placeholder="User ID" />
                 </div>
-                <div class="col-lg-4 text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label" style="text-align: left">Password:</label>
                 <div class="col-lg-3">
                     <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password" />
                 </div>
-                <div class="col-lg-4 text-danger"></div>
             </div>
+            <?php
+            if ($loginError) {
+                echo <<<EOT
+<div class="incorrectInfo">
+    <p>Username or password is incorrect.</p>
+</div>
+EOT;
+            }
+            ?>
             <input type="submit" name="btnLogin" class="col-lg-2 mb-2 btn btn-primary" value="Log In" />
             <input type="reset" name="btnReset" class="col-lg-2 mb-2 btn btn-primary" value="Reset" />
         </form>
