@@ -41,8 +41,13 @@ and open the template in the editor.
     Other
 */
 
-/* Login.php */
+/* Index.php */
 
+.thingsToDoIndex li {
+    list-style: square;
+}
+
+/* Login.php */
 input[name=btnLogin] {
     margin-right: 5px;
 }
