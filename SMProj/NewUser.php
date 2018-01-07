@@ -15,48 +15,48 @@ PHP Social Media Project
             <div class="form-group">
                 <label for="name" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Student ID:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="name" name="studentid" value="<?php echo $studentid; ?>">
+                    <input type="text" class="form-control" id="studentid" name="studentid" value="<?php echo $studentid; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
-                    <?php echo $studenterrormsg ?>
+                    <?php echo $studentiderrormsg ?>
                 </div>                        
             </div>
             <div class="form-group">
                 <label for="postalcode" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Name:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="postalcode" name="name" value="<?php echo $name; ?>">
+                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
                     <?php echo $nameerrormsg ?>
                 </div>    
             </div>
             <div class="form-group">
-                <label for="phonenumber" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Phone Number:
+                <label for="phone" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Phone Number:
                     <br><label style="font-weight: normal">(nnn-nnn-nnnn)</label>
                 </label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="phonenumber" name="phonenumber" value="<?php echo $phone; ?>">
+                    <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $phone; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
                     <?php echo $phoneerrormsg ?>
                 </div>                         
             </div>
             <div class="form-group">
-                <label for="emailaddress" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Password:</label>
+                <label for="password" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Password:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="emailaddress" name="password" value="<?php echo $password; ?>">
+                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $password; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
                     <?php echo $passworderrormsg ?>
                 </div>                         
             </div>
             <div class="form-group">
-                <label for="emailaddress" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Confirm Password:</label>
+                <label for="password2" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Confirm Password:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="emailaddress" name="confirmpassword" value="<?php echo $password; ?>">
+                    <input type="text" class="form-control" id="password2" name="password2" value="<?php echo $password2; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
-                    <?php echo $confirmpassworderrormsg ?>
+                    <?php echo $password2errormsg ?>
                 </div>                         
             </div>
             <br>
