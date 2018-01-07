@@ -1,7 +1,6 @@
 <?php
 // Login Query function
 function loginQuery($UserId, $Password) {
-
     $dbConnection = parse_ini_file("db_connection.ini");
     extract($dbConnection);
     $myPdo = new PDO($dsn, $user, $password);

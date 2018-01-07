@@ -16,6 +16,7 @@ if ($_POST) {
     $password = $_POST["inputPassword"];
 
     // Connect to DB
+    loginQuery($studentID, $password);
 
     // Parse the Info
     $loginError = true;
