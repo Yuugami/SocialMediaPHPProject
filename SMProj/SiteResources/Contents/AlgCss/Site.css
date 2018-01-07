@@ -47,8 +47,11 @@ input[name=btnLogin] {
     margin-right: 5px;
 }
 
-/* MyPictures.php */
+.incorrectInfo p {
+    color: red;
+}
 
+/* MyPictures.php */
 .selectedPicture {
     position: relative;
     border: 1px solid black;
