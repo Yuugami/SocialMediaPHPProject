@@ -6,7 +6,51 @@ PHP Social Media Project
 -->
 
 <body>
-    <?php include ("./CommonFiles/Header.php"); ?>
+    <?php include ("./CommonFiles/Header.php");
+    
+    $studentid = "";
+    $studentiderrormsg = "";
+    
+    $name = "";
+    $nameerrormsg = "";
+    
+    $phone = "";
+    $phoneerrormsg = "";
+    
+    $password = "";
+    $passworderrormsg = "";
+    
+    $password2 = "";
+    $password2errormsg = "";
+    
+    if (isset($_POST["submit"])) {
+        if (isset($studentid)) {
+            $studentid = trim($_POST["studentid"]);
+        }
+        $studentiderrormsg = ValidateStudentID($studentid);
+
+        if (isset($name)) {
+            $name = trim($_POST["name"]);
+        }
+        $nameerrormsg = ValidateName($name);
+
+        if (isset($phone)) {
+            $phone = trim($_POST["phonenumber"]);
+        }
+        $phoneerrormsg = ValidatePhone($phone);
+
+        if (isset($password)) {
+            $password = trim($_POST["password"]);
+        }
+        $passworderrormsg = ValidatePassword($password);
+
+        if (isset($password, $password2)) {
+            $password2 = ($_POST["password2"]);
+        }
+        $password2errormsg = ValidatePassword2($password, $password2);
+    }
+    ?>
+    
     <div class="container col-lg-8">
         <h1 style="text-align: center">Sign Up</h1>
         <p class="col-lg-offset-1">All fields are required.</p><br>

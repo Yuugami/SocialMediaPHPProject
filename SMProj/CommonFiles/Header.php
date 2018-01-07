@@ -13,6 +13,7 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo $directoryPrefix; ?>/SiteResources/Contents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $directoryPrefix; ?>/SiteResources/Contents/AlgCss/Site.css" rel="stylesheet" type="text/css" />
+    <?php echo include ("./CommonFiles/Functions.php"); ?>
 </head>
     <body style="padding-top: 50px; margin-bottom: 60px;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
