@@ -16,34 +16,9 @@ if ($_POST) {
     $password = $_POST["inputPassword"];
 
     // Connect to DB
-    //$dbManager = new DBManager();
-    //$studentRepo = new DBStudentRepository($dbManager);
-    //$dbManager->connect();
-    //$studentsArray = $studentRepo->getAll();
-    //$dbManager->close();
 
     // Parse the Info
     $loginError = true;
-    foreach ($studentsArray as $value)
-    {
-        if ($value->studentID == $studentID && $value->password == $password) {
-            $loginError = false;
-            $_SESSION["LoggedInUser"] = $value;
-
-            // Redirect to the proper page
-            //ob_end_clean( ); // Run this if the Redirect doesn't work
-
-            $returnUrl = $_GET["returnUrl"];
-            if (empty($returnUrl)) {
-                // Not specified defaults to Course Selection Page
-                header("Location: CourseSelection.php");
-            }
-            else {
-                header("Location: $returnUrl");
-            }
-            die();
-        }
-    }
 }
 ?>
 
