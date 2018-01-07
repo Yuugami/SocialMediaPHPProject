@@ -8,8 +8,12 @@ PHP Social Media Project
 <body>
     <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
-        <h1 style="text-align: center">Add Friend</h1><br>
-        <p class="text-center">Welcome <b>(insert name here)</b>! (Not you? Change user <a href="(insertlinkhere)">here</a>.)</p>
+        <h1 style="text-align: center">Add Friend</h1>
+        <br>
+        <p class="text-center">
+            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
+        </p>
         <p class="text-center">Enter the ID of the user you want to add as a friend.</p><br>
 
         <form class="form-horizontal col-lg-offset-2" id="depositForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">

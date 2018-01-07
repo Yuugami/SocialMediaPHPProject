@@ -8,16 +8,18 @@ and open the template in the editor.
     <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
         <h1 class="text-center">My Friends</h1>
-        <p>
-            Welcome Wei Gong!(not you change user
-            <a>here</a>)!
+        <br>
+        <p class="text-center">
+            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
+        <br>
         <form class="form-horizontal" id="defriendForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <table class="table table-striped">
                 <thead class="thead-inverse">
                     <th>Name</th>
                     <th>Shared Albums</th>
-                    <th>Defriend</th>
+                    <th>Unfriend</th>
                 </thead>
                 <tr>
                     <td>John Smith</td>
@@ -34,7 +36,7 @@ and open the template in the editor.
                     </td>
                 </tr>
             </table>
-            <input type="submit" name="Defriend" value="Defriend" class="col-lg-2 btn btn-primary pull-right" />
+            <input type="submit" name="Defriend" value="Unfriend" class="col-lg-2 btn btn-primary pull-right" />
             <div class="clearfix"></div>
         </form>
 

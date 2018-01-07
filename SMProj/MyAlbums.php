@@ -7,10 +7,13 @@ and open the template in the editor.
 <body>
     <?php include ("./CommonFiles/Header.php"); ?>
     <div class="container">
-        <h1>My Albums</h1>
-        <p>
-            Welcome <?php echo $studentName?>! (not you? change user <a href="<?php echo $directoryPrefix;?>/Logout.php">here</a>)
+        <h1 style="text-align: center">My Albums</h1>
+        <br>
+        <p class="text-center">
+            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
+        <br>
         <table class="table">
             <tr>
                 <th>Title</th>
