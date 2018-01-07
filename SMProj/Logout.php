@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+<?php include ("./CommonFiles/Header.php"); ?>
+
+<div class="container">
+    <h1>Logout</h1>
+</div>
+
+<?php
+// Completely annihilate the session
+session_unset();
+session_destroy();
+
+// Redirect to Index.php
+header("Location: index.php");
+die();
+?>
+
+<?php include ("./CommonFiles/Footer.php"); ?>

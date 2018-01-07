@@ -40,7 +40,11 @@ and open the template in the editor.
                     <li><a href="<?php echo $directoryPrefix; ?>/MyAlbums.php">My Albums</a></li>
                     <li><a href="<?php echo $directoryPrefix; ?>/MyPictures.php">My Pictures</a></li>
                     <li><a href="<?php echo $directoryPrefix; ?>/UploadPictures.php">Upload Pictures</a></li>
+                    <?php if (empty($_SESSION["LoggedInUserId"])) : ?>
                     <li><a href="<?php echo $directoryPrefix; ?>/Login.php">Log In</a></li>
+                    <?php else : ?>
+                    <li><a href="<?php echo $directoryPrefix; ?>/Logout.php">Logout</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
