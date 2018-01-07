@@ -48,5 +48,6 @@ input[name=btnLogin] {
 }
 
 /* Faizan's CSS Section*/
-
-
+.ml-10px {
+    margin-left: 10px;
+}
