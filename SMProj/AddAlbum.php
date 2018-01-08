@@ -26,10 +26,6 @@ if ($_POST) {
         $error = true;
     }
 
-    if (!validateAddAlbum($_POST[description])) {
-        $descriptionerrormsg = "Required Field";
-        $error = true;
-    }
     /* Section Two */
     if (!$error) {
         $time = date('Y-m-d');
@@ -73,10 +69,7 @@ if ($_POST) {
                 <label for="description" class="col-lg-2 col-lg-offset-1 control-label" style="text-align: left">Description:</label>
                 <div class="col-lg-5">
                     <textarea rows="6" type="" class="form-control" id="description" name="description" value="<?php echo $description; ?>"></textarea>
-                </div>
-                <div class="col-lg-4 text-danger">
-                    <?php echo $descriptionerrormsg ?>
-                </div>                         
+                </div>                        
             </div>
             <br>
             <div class="col-lg-offset-1">
