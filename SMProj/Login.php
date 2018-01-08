@@ -8,9 +8,6 @@ and open the template in the editor.
 $loginError = false;
 
 if ($_POST) {
-    // If $_GET["returnUrl"] exists
-    //if ($_GET["returnUrl"])
-
     // Gather Info
     $studentID = $_POST["inputUserID"];
     $password = $_POST["inputPassword"];
@@ -25,8 +22,11 @@ if ($_POST) {
         $_SESSION["LoggedInUserId"] = $info["UserId"];
         $_SESSION["LoggedInUserName"] = $info["Name"];
 
-        if ($_GET["returnUrl"])
-            header("Location: $_GET[returnUrl]");
+        $returnToPath = $_SERVER["HTTP_REFERER"];
+        $temp = explode("%2F", $returnToPath);
+
+        if (sizeof($temp) == 2)
+            header("Location: $temp[1]");
         else
             header("Location: index.php");
     }
