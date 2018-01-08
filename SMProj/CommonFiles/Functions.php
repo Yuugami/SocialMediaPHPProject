@@ -66,18 +66,10 @@ function validateAddAlbum($target) {
 //UploadPictures.php functions
 
 function ValidateAlbum($album) {
-    if (isset($album)) {
+    if (isset($album) && $album != "") {
 
     } else {
         return "Album Required";
-    }
-}
-
-function ValidateFile($file) {
-    if (isset($file)) {
-
-    } else {
-        return "File(s) Required";
     }
 }
 
