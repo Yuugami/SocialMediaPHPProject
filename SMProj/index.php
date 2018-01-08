@@ -12,7 +12,7 @@ if ($_SESSION["LoggedInUserId"]) {
 ?>
 <body>
     <div class="container-fluid" style="padding-top: 20px; padding-left: 40px">
-        <h1>Welcome to the Algonquin Social Media Website, <b><?php if($LoggedView) {echo "$_SESSION[LoggedInUserName]";} ?></b>!</h1><br>
+        <h1>Welcome to the Algonquin Social Media Website<b><?php if($LoggedView) {echo ", $_SESSION[LoggedInUserName]";} ?></b>!</h1><br>
         <?php if ($LoggedView) : ?>
         <p>What will you do today?</p>
         <ul class="thingsToDoIndex">

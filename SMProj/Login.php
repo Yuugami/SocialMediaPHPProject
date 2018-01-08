@@ -5,11 +5,12 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-    // If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
-    //$LoggedInUser = isset($_SESSION["LoggedInUser"]) ? $_SESSION["LoggedInUser"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
 $loginError = false;
 
 if ($_POST) {
+    // If $_GET["returnUrl"] exists
+    //if ($_GET["returnUrl"])
+
     // Gather Info
     $studentID = $_POST["inputUserID"];
     $password = $_POST["inputPassword"];
@@ -23,7 +24,11 @@ if ($_POST) {
     if ($info) {
         $_SESSION["LoggedInUserId"] = $info["UserId"];
         $_SESSION["LoggedInUserName"] = $info["Name"];
-        header("Location: index.php");
+
+        if ($_GET["returnUrl"])
+            header("Location: $_GET[returnUrl]");
+        else
+            header("Location: index.php");
     }
     else {
         $loginError = true;

@@ -6,7 +6,11 @@ PHP Social Media Project
 -->
 <?php
 // If user is logged in, assign Student object to $LoggedInUser, otherwise redirect to login and die (self-executing function)
-$LoggedInUser = isset($_SESSION["LoggedInUserId"]) ? $_SESSION["LoggedInUserId"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
+//$LoggedInUser = isset($_SESSION["LoggedInUserId"]) ? $_SESSION["LoggedInUserId"] : (function() { header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); die();})();
+if (!isset($_SESSION["LoggedInUserId"])) {
+    header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); 
+    die();
+}
 ?>
 <body>
     <div class="container">
