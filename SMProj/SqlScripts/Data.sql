@@ -1,8 +1,7 @@
 use CST8257;
 
-
 #User Table Data
-INSERT INTO Users (UserId, Name, Phone, Password) VALUES 
+INSERT INTO Users (UserId, UserName, Phone, UserPassword) VALUES 
 ('0001', 'Jon Snow', '6131234567', 'password1'),
 ('0002', 'Barry Allen', '6131234567', 'password1'),
 ('0003', 'Clark Kent', '6131234567', 'password1'),
@@ -36,7 +35,7 @@ INSERT INTO FriendshipStatus (Status_Code, Description) VALUES
 
 
 # Friends
-INSERT INTO Friendship (Friend_RequesterId, Friend_RequesteeId, Status) VALUES 
+INSERT INTO Friendship (Friend_RequesterId, Friend_RequesteeId, Status_Code) VALUES 
 ('0001', '0002', 'accepted'),
 ('0001', '0003', 'accepted'),
 ('0004', '0001', 'request'),
