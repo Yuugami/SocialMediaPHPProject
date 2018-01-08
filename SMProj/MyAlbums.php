@@ -20,6 +20,9 @@ if (!isset($_SESSION["LoggedInUserId"])) {
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <br>
+        <p class="col-lg-offset-10">
+            <a href="AddAlbum.php">Create a New Album</a>
+        </p>
         <table class="table">
             <tr>
                 <th>Title</th>
@@ -27,8 +30,11 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 <th>Number of Pictures</th>
                 <th>Accessibility</th>
                 <th></th>
-            </tr>            <?php
-            // Print All Albums
+            </tr>
+            <?php
+            // Print All Albums Portion
+            // Get the name
+            
             for ($i = 0; $i <= 5; $i++) {
             echo <<< EOT
             <tr>
@@ -46,5 +52,6 @@ EOT;
             }
             ?>
         </table>
-    </div><?php include ("./CommonFiles/Footer.php"); ?>
+    </div>
+    <?php include ("./CommonFiles/Footer.php"); ?>
 </body>
