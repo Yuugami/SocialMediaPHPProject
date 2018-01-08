@@ -44,3 +44,4 @@ INSERT INTO Friendship (Friend_RequesterId, Friend_RequesteeId, Status) VALUES
 ('0002', '0001', 'accepted'),
 ('0002', '0004', 'accepted');
 
+
