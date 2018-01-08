@@ -18,6 +18,13 @@ function loginQuery($UserId, $Password) {
         return FALSE;
 }
 
+function NewUser($UserId, $Name, $Phone, $Password){
+    $myPdo = connectToDb();
+    $sql = "INSERT INTO Users (UserId, Name, Phone, Password) VALUES (:userId, :name, :phone, :password);";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('userId' => $UserId, 'name' => $Name, 'phone' => $Phone, 'password' => $Password));
+}
+
 function checkUserId($UserId){
     $myPdo = connectToDb();
     $sql = 'SELECT Name FROM Users WHERE UserId = :userId';
