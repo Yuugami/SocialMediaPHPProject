@@ -60,4 +60,26 @@ function CreateAlbum($title, $description, $date, $ownerId, $accessibility){
 
     return $myPdo->lastInsertId();
 }
+
+function getFriendsList($UserId){
+    // Returns an containing Friends UserId, Name & Count of Shared Albums
+    // $results is an array containing friends
+    // Name: ['UserId'], ['Name'], ['AlbumsShared']
+    
+    $myPdo = connectToDb();
+    $sql = "SELECT Users.UserId, Users.Name, Friendship.Status FROM Users INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status = 'accepted'";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('userId' => $UserId));
+    $data = $pStatment->fetchAll();
+    
+    $results = array();
+    foreach ($data as $row){
+        $sql = "SELECT count(Album.Album_Id) AS SharedCount  FROM Album WHERE Album.Owner_Id = :userId AND Album.Accessibility_Code = 'shared';";
+        $pStatment = $myPdo->prepare($sql);
+        $pStatment->execute( array('userId' => $row['UserId']));
+        $numberOfSharedAlbums = $pStatment->fetch();
+        array_push($results, array('UserId' => $row['UserId'], 'Name' => $row['Name'], 'AlbumsShared' =>  $numberOfSharedAlbums['SharedCount']));
+    }
+    return $results;
+}
 ?>
