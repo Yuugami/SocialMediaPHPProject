@@ -54,11 +54,31 @@ function ValidatePassword2($password, $password2) {
     }
 }
 
-// AddAlbum.php
+// AddAlbum.php functions
+
 function validateAddAlbum($target) {
     if (empty($target))
         return false;
     else
         return true;
 }
+
+//UploadPictures.php functions
+
+function ValidateAlbum($album) {
+    if (isset($album)) {
+
+    } else {
+        return "Album Required";
+    }
+}
+
+function ValidateFile($file) {
+    if (isset($file)) {
+
+    } else {
+        return "File(s) Required";
+    }
+}
+
 ?>

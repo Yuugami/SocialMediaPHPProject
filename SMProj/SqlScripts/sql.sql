@@ -13,9 +13,9 @@ DROP TABLE IF EXISTS CST8257.FriendshipStatus;
 
 CREATE TABLE CST8257.Users (
    	UserId varchar(16) NOT NULL PRIMARY KEY,
-   	Name varchar(256) NOT NULL,
+   	UserName varchar(256) NOT NULL,
    	Phone varchar(16),
-   	Password varchar(256)
+   	UserPassword varchar(256)
 );
 
 CREATE TABLE CST8257.Accessibility (
@@ -49,7 +49,7 @@ CREATE TABLE CST8257.Comments (
 	Author_Id varchar(16) NOT NULL,
 	Picture_Id int(11) NOT NULL,
 	Comment_Text varchar(3000) NOT NULL,
-	Date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	Comment_Date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (Author_Id) REFERENCES Users (UserId),
 	FOREIGN KEY (Picture_Id) REFERENCES Picture (Picture_Id)
 );
@@ -62,8 +62,8 @@ CREATE TABLE CST8257.FriendshipStatus (
 CREATE TABLE CST8257.Friendship (
 	Friend_RequesterId varchar(16) NOT NULL,
 	Friend_RequesteeId varchar(16) NOT NULL,
-	Status varchar(16) NOT NULL,
+	Status_Code varchar(16) NOT NULL,
 	FOREIGN KEY (Friend_RequesterId) REFERENCES Users (UserId),
 	FOREIGN KEY (Friend_RequesteeId) REFERENCES Users (UserId),
-	FOREIGN KEY (Status) REFERENCES FriendshipStatus (Status_Code)
+	FOREIGN KEY (Status_Code) REFERENCES FriendshipStatus (Status_Code)
 );
