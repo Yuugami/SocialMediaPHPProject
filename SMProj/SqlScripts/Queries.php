@@ -9,7 +9,7 @@ function connectToDb(){
 // Login Query function // Works
 function loginQuery($UserId, $Password) {
     $myPdo = connectToDb();
-    $sql = 'SELECT UserId, UserName FROM Users WHERE UserId = :userId AND UserPassword = :password';
+    $sql = 'SELECT UserId, UserName AS Name FROM Users WHERE UserId = :userId AND UserPassword = :password';
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('userId' => $UserId, 'password' => $Password));
     $data = $pStatment->fetch();
@@ -100,7 +100,7 @@ function getFriendsList($UserId){
     // Name: ['UserId'], ['Name'], ['AlbumsShared']
 
     $myPdo = connectToDb();
-    $sql = "SELECT Users.UserId, Users.UserName, Friendship.Status_Code
+    $sql = "SELECT Users.UserId, Users.UserName As Name, Friendship.Status_Code
             FROM Users
             INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId
             WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted'";
@@ -123,7 +123,7 @@ function getFriendsRequests($UserId){
     // Returns False on no FriendRequests
 
     $myPdo = connectToDb();
-    $sql = "SELECT Users.UserId, Users.UserName, Friendship.Status_Code FROM Users INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesterId   WHERE Friendship.Friend_RequesteeId = :userId AND Friendship.Status_Code = 'request'";
+    $sql = "SELECT Users.UserId, Users.UserName AS Name, Friendship.Status_Code FROM Users INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesterId   WHERE Friendship.Friend_RequesteeId = :userId AND Friendship.Status_Code = 'request'";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId));
     $data = $pStatment->fetchAll();
