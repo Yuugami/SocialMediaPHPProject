@@ -10,6 +10,32 @@ if (!isset($_SESSION["LoggedInUserId"])) {
     header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI'])); 
     die();
 }
+// On Post...
+// 1. Validate
+// 2. Add To Databse
+if ($_POST) {
+    /* Section One */
+    $error = false;
+    if (!validateAddAlbum($_POST[title])) {
+        $titleerrormsg = "Required Field";
+        $error = true;
+    }
+
+    if (!validateAddAlbum($_POST[accessibility])) {
+        $accessibilityerrormsg = "Required Field";
+        $error = true;
+    }
+
+    if (!validateAddAlbum($_POST[description])) {
+        $descriptionerrormsg = "Required Field";
+        $error = true;
+    }
+    /* Section Two */
+    if (!$error) {
+        $time = date('Y-m-d');
+        CreateAlbum($_POST[title], $_POST[description], $time, $_SESSION[LoggedInUserId], $_POST[accessibility]);
+    }
+}
 ?>
 <body>
     <div class="container">
@@ -34,7 +60,7 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 <label for="accessibility" class="col-lg-2 col-lg-offset-1 control-label" style="text-align: left">Accessibility:</label>
                 <div class="col-lg-5">
                     <select class="form-control" id="accessibility" name="accessibility" value="<?php echo $accessibility; ?>">
-                        <option style="display:none">Please Select Level of Access</option>
+                        <option value="" style="display:none">Please Select Level of Access</option>
                         <option value="private">Accessible Only by Owner</option>
                         <option value="shared">Accessible by Owner and Friends</option>              
                     </select>

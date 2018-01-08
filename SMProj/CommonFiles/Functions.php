@@ -15,7 +15,7 @@ function ValidateStudentID($studentid) {
 
 function ValidateName($name) {
     if (trim($name) && isset($name)) {
-        
+
     } else {
         return "Name Required";
     }
@@ -25,7 +25,7 @@ function ValidatePhone($phone) {
     $phoneregex = "/[2-9][0-9]{2}-[2-9][0-9]{2}-\d{4}/";
     if (trim($phone) && isset($phone)) {
         if (preg_match($phoneregex, $phone, $phonevalid)) {
-            
+
         } else {
             return "Phone Number Invalid";
         }
@@ -36,7 +36,7 @@ function ValidatePhone($phone) {
 
 function ValidatePassword($password) {
     if (trim($password) && isset($password)) {
-        
+
     } else {
         return "Password Required";
     }
@@ -45,7 +45,7 @@ function ValidatePassword($password) {
 function ValidatePassword2($password, $password2) {
     if (trim($password2) && isset($password2)) {
         if ($password == $password2) {
-            
+
         } else {
             return "Passwords Must Match";
         }
@@ -53,5 +53,12 @@ function ValidatePassword2($password, $password2) {
         return "Password Confirmation Required";
     }
 }
-        
+
+// AddAlbum.php
+function validateAddAlbum($target) {
+    if (empty($target))
+        return false;
+    else
+        return true;
+}
 ?>
