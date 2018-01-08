@@ -6,6 +6,7 @@ function connectToDb(){
     return new PDO($dsn, $user, $password);;
 }
 
+//----------------------------------- User Related Functions ---------------------------------
 // Login Query function // Works
 function loginQuery($UserId, $Password) {
     $myPdo = connectToDb();
@@ -39,6 +40,10 @@ function checkUserId($UserId){
         return FALSE; // If User does not exist
 }
 
+
+
+
+//----------------------------------- Albums Functions -------------------------------------------------
 // Create Album Query // Works
 function CreateAlbum($title, $description, $date, $ownerId, $accessibility) {
 
@@ -103,6 +108,10 @@ function deleteAlbum($AlbumId) {
     $pStatment->execute( array('albumId' => $AlbumId) );
 }
 
+
+
+
+//---------------------------- My Friends Page Functions ------------------------------------
 function getFriendsList($UserId){
     // Returns an containing Friends UserId, Name & Count of Shared Albums
     // $results is an array containing friends
@@ -189,4 +198,5 @@ function RejectFriendRequest($UserId, $RequesterId){
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId, 'requesterId' => $RequesterId));
 }
+
 ?>
