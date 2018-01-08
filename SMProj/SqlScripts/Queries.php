@@ -29,7 +29,7 @@ function NewUser($UserId, $Name, $Phone, $Password){
 
 function checkUserId($UserId){
     $myPdo = connectToDb();
-    $sql = 'SELECT UserName FROM Users WHERE UserId = :userId';
+    $sql = 'SELECT UserName As Name FROM Users WHERE UserId = :userId';
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('userId' => $UserId));
     $data = $pStatment->fetch();
