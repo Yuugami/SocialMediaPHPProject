@@ -21,9 +21,12 @@ if (!isset($_SESSION["LoggedInUserId"])) {
         </p>
         <br>
         <form class="form-horizontal" id="defriendForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <p class="col-lg-offset-10">
-                <a href="AddFriend.php">Add Friends</a>
-            </p>
+            <div class="row">
+                <span class="col-lg-3">Friends:</span>
+                <span class="col-lg-offset-7">
+                    <a href="AddFriend.php">Add Friends</a>
+                </span>
+            </div>
             <table class="table table-striped">
                 <thead class="thead-inverse">
                     <th>Name</th>
@@ -32,26 +35,20 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 </thead>
                 <?php
                 $listOfFriends = getFriendsList($_SESSION["LoggedInUserId"]);
+                $index = 0;
+                //var_dump($listOfFriends);
                 foreach ($listOfFriends as $friend) {
                     echo <<<EOT
-
+                    <tr>
+                        <td>$friend[Name]</td>
+                        <td>$friend[AlbumsShared]</td>
+                        <td>
+                            <input type="checkbox" name="friend$index" value="value$index" />
+                        </td>
+                    </tr>
 EOT;
                 }
                 ?>
-                <tr>
-                    <td>John Smith</td>
-                    <td>0</td>
-                    <td>
-                        <input type="checkbox" name="friend1" value="value1" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Peter Adams</td>
-                    <td>0</td>
-                    <td>
-                        <input type="checkbox" name="friend2" value="value2" />
-                    </td>
-                </tr>
             </table>
             <input type="submit" name="Defriend" value="Unfriend" class="col-lg-2 btn btn-primary pull-right" />
             <div class="clearfix"></div>
@@ -60,21 +57,23 @@ EOT;
         <form class="form-horizontal" id="friendRequestForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <table class="table table-striped">
                 <thead class="thead-inverse">
-                <th>Name</th>
-                <th>Accept or Deny</th>
+                    <th>Name</th>
+                    <th>Accept or Deny</th>
                 </thead>
-                <tr>
-                    <td>Mary Johnson</td>
-                    <td>
-                        <input type="checkbox" name="friend3" value="value3" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mark Watson</td>
-                    <td>
-                        <input type="checkbox" name="friend4" value="value4" />
-                    </td>
-                </tr>
+                <?php
+                $listOfRequests = getFriendsRequests($_SESSION["LoggedInUserId"]);
+                //var_dump($listOfRequests);
+                foreach ($listOfRequests as $request) {
+                    echo <<<EOT
+                    <tr>
+                        <td>$request[Name]</td>
+                        <td>
+                            <input type="checkbox" name="friend$index" value="value$index" />
+                        </td>
+                    </tr>
+EOT;
+                }
+                ?>
             </table>
             <div class="form-group rows">
                 <input type="button" name="Reject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" />
