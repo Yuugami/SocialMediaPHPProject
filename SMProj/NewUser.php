@@ -6,22 +6,22 @@ PHP Social Media Project
 -->
 <body>
     <?php include ("./CommonFiles/Header.php");
-    
+
     $studentid = "";
     $studentiderrormsg = "";
-    
+
     $name = "";
     $nameerrormsg = "";
-    
+
     $phone = "";
     $phoneerrormsg = "";
-    
+
     $password = "";
     $passworderrormsg = "";
-    
+
     $password2 = "";
     $password2errormsg = "";
-    
+
     if (isset($_POST["submit"])) {
         if (isset($studentid)) {
             $studentid = trim($_POST["studentid"]);
@@ -34,9 +34,10 @@ PHP Social Media Project
         $nameerrormsg = ValidateName($name);
 
         if (isset($phone)) {
-            $phone = trim($_POST["phonenumber"]);
+            $phone = trim($_POST["phone"]);
         }
         $phoneerrormsg = ValidatePhone($phone);
+        $phone = str_replace("-", "", $phone);
 
         if (isset($password)) {
             $password = trim($_POST["password"]);
@@ -47,6 +48,9 @@ PHP Social Media Project
             $password2 = ($_POST["password2"]);
         }
         $password2errormsg = ValidatePassword2($password, $password2);
+
+        if (empty($studentiderrormsg) && empty($nameerrormsg) && empty($phoneerrormsg) && empty($passworderrormsg) && empty($password2errormsg))
+            NewUser($studentid, $name, $phone, $password);
     }
     ?>
     
@@ -87,7 +91,7 @@ PHP Social Media Project
             <div class="form-group">
                 <label for="password" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Password:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $password; ?>">
+                    <input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
                     <?php echo $passworderrormsg ?>
@@ -96,7 +100,7 @@ PHP Social Media Project
             <div class="form-group">
                 <label for="password2" class="col-lg-3 col-lg-offset-1 control-label" style="text-align: left">Confirm Password:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control" id="password2" name="password2" value="<?php echo $password2; ?>">
+                    <input type="password" class="form-control" id="password2" name="password2" value="<?php echo $password2; ?>">
                 </div>
                 <div class="col-lg-4 text-danger">
                     <?php echo $password2errormsg ?>

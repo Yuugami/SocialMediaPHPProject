@@ -19,6 +19,7 @@ function loginQuery($UserId, $Password) {
         return FALSE;
 }
 
+// New User Query // Works
 function NewUser($UserId, $Name, $Phone, $Password){
     $myPdo = connectToDb();
     $sql = "INSERT INTO Users (UserId, Name, Phone, Password) VALUES (:userId, :name, :phone, :password);";
