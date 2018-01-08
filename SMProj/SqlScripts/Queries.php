@@ -91,4 +91,19 @@ function getFriendsList($UserId){
     }
     return $results;
 }
+function getFriendsRequests($UserId){
+    // Returns an array containing FriendsRequests that contains UserId, Name
+    // Returns False on no FriendRequests
+
+    $myPdo = connectToDb();
+    $sql = "SELECT Users.UserId, Users.Name, Friendship.Status FROM Users INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status = 'request'";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('userId' => $UserId));
+    $data = $pStatment->fetchAll();
+    
+    if(!$data){
+        return FALSE;
+    }
+    return $data;
+}
 ?>
