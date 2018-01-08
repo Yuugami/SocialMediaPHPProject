@@ -49,8 +49,10 @@ PHP Social Media Project
         }
         $password2errormsg = ValidatePassword2($password, $password2);
 
-        if (empty($studentiderrormsg) && empty($nameerrormsg) && empty($phoneerrormsg) && empty($passworderrormsg) && empty($password2errormsg))
+        if (empty($studentiderrormsg) && empty($nameerrormsg) && empty($phoneerrormsg) && empty($passworderrormsg) && empty($password2errormsg)) {
             NewUser($studentid, $name, $phone, $password);
+            header("Location: index.php");
+        }
     }
     ?>
     

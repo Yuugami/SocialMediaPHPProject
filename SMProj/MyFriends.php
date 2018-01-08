@@ -21,12 +21,23 @@ if (!isset($_SESSION["LoggedInUserId"])) {
         </p>
         <br>
         <form class="form-horizontal" id="defriendForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <p class="col-lg-offset-10">
+                <a href="AddFriend.php">Add Friends</a>
+            </p>
             <table class="table table-striped">
                 <thead class="thead-inverse">
-                <th>Name</th>
-                <th>Shared Albums</th>
-                <th>Unfriend</th>
+                    <th>Name</th>
+                    <th>Shared Albums</th>
+                    <th>Unfriend</th>
                 </thead>
+                <?php
+                $listOfFriends = getFriendsList($_SESSION["LoggedInUserId"]);
+                foreach ($listOfFriends as $friend) {
+                    echo <<<EOT
+
+EOT;
+                }
+                ?>
                 <tr>
                     <td>John Smith</td>
                     <td>0</td>
@@ -50,7 +61,7 @@ if (!isset($_SESSION["LoggedInUserId"])) {
             <table class="table table-striped">
                 <thead class="thead-inverse">
                 <th>Name</th>
-                <th>Accept</th>
+                <th>Accept or Deny</th>
                 </thead>
                 <tr>
                     <td>Mary Johnson</td>
@@ -66,7 +77,7 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 </tr>
             </table>
             <div class="form-group rows">
-                <input type="button" name="Regject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" />
+                <input type="button" name="Reject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" />
                 <input type="submit" name="Accept" value="Accept Selected" class="col-lg-2 btn btn-primary pull-right" />
             </div>
 
