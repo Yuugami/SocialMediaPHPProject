@@ -16,16 +16,16 @@ INSERT INTO Accessibility (Accessibility_Code, Description) VALUES
 
 
 # Album Data
-INSERT INTO Album (Album_Id, Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES 
-('0001', 'Friends', 'Toronto tour', '2018-01-12', '0001', 'shared'),
-('0002', 'Personal Pictures', 'Jon\'s personal pictures', '2017-01-15', '0001', 'private'),
-('0003', 'Family trip', 'Family trip to bahamas', '2015-12-05', '0001', 'shared'),
-('0004', 'School tour', 'US School tour', '2014-03-16', '0002', 'shared'),
-('0005', 'Personal Pictures', 'Barry\'s personal pictures', '2018-07-14', '0002', 'private'),
-('0006', 'Family trip', 'Family trip to Halifax', '2010-11-13', '0002', 'shared'),
-('0007', 'College tour', 'Europe College tour', '2015-10-10', '0003', 'shared'),
-('0008', 'Personal Pictures', 'Clark\'s personal pictures', '2017-01-12', '0003', 'private'),
-('0009', 'Family trip', 'Family trip to China', '2013-11-12', '0003', 'shared');
+INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES 
+('Friends', 'Toronto tour', '2018-01-12', '0001', 'shared'),
+('Personal Pictures', 'Jon\'s personal pictures', '2017-01-15', '0001', 'private'),
+('Family trip', 'Family trip to bahamas', '2015-12-05', '0001', 'shared'),
+('School tour', 'US School tour', '2014-03-16', '0002', 'shared'),
+('Personal Pictures', 'Barry\'s personal pictures', '2018-07-14', '0002', 'private'),
+('Family trip', 'Family trip to Halifax', '2010-11-13', '0002', 'shared'),
+('College tour', 'Europe College tour', '2015-10-10', '0003', 'shared'),
+('Personal Pictures', 'Clark\'s personal pictures', '2017-01-12', '0003', 'private'),
+('Family trip', 'Family trip to China', '2013-11-12', '0003', 'shared');
 
 # FriendShip Status
 INSERT INTO FriendshipStatus (Status_Code, Description) VALUES
