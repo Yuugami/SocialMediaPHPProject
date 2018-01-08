@@ -22,11 +22,13 @@ if ($_POST) {
         $_SESSION["LoggedInUserId"] = $info["UserId"];
         $_SESSION["LoggedInUserName"] = $info["Name"];
 
+        // If there was an attempt to access a protected page...
         $returnToPath = $_SERVER["HTTP_REFERER"];
-        $temp = explode("%2F", $returnToPath);
-
-        if (sizeof($temp) == 2)
-            header("Location: $temp[1]");
+        // It will fetch it here...
+        $theProtectedPage = explode("%2F", $returnToPath);
+        // Otherwise it will go straight to index.
+        if (sizeof($theProtectedPage) == 2)
+            header("Location: $theProtectedPage[1]");
         else
             header("Location: index.php");
     }
