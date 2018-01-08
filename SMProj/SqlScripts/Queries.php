@@ -85,13 +85,22 @@ function showAlbums($ownerID) {
 }
 
 // To Do by Faizan for MyAlbums.php
-function saveAccessibilityChanges() {
+function saveAccessibilityChanges($Album_Id, $Accessibility_Code) {
+    // $AlbumId need to integer
+    // $Accessibility_Code accepts: shared, private
     $myPdo = connectToDb();
+    $sql = "UPDATE Album SET Accessibility_Code = :accessibility_Code WHERE Album_Id = :album_Id;";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('accessibility_Code' => $Accessibility_Code, 'album_Id' => $Album_Id));
 }
 
 // To Do by Faizan for MyAlbums.php
-function deleteAlbum() {
-
+function deleteAlbum($AlbumId) {
+    // $AlbumId need to integer
+    $myPdo = connectToDb();
+    $sql = "DELETE FROM Album WHERE Album_Id = :albumId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('albumId' => $AlbumId) );
 }
 
 function getFriendsList($UserId){
