@@ -23,7 +23,7 @@ function loginQuery($UserId, $Password) {
 // New User Query // Works
 function NewUser($UserId, $Name, $Phone, $Password){
     $myPdo = connectToDb();
-    $sql = "INSERT INTO Users (UserId, UserName, Phone, UserPassword) VALUES (:userId, :name, :phone, :password);";
+    $sql = "INSERT INTO Users (UserId, UserName, Phone, UserPassword) VALUES (:userId, :name, :phone, :password)";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId, 'name' => $Name, 'phone' => $Phone, 'password' => $Password));
 }
@@ -197,6 +197,65 @@ function RejectFriendRequest($UserId, $RequesterId){
     $sql = "DELETE FROM Friendship WHERE Friend_RequesteeId = :userId AND Friend_RequesterId = :requesterId AND Status_Code = 'request'";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId, 'requesterId' => $RequesterId));
+}
+
+function addFriend($RequesterId, $RequesteeId){
+    // Returns 0 If sending request to Self
+    // Returns 1 If Requestee does not exist
+    // Returns 2 If Requestee is already Requester's friend
+    // Returns 3 If Requester has already sent a request to Requestee
+    // Returns 4 They becomes friends if Requester has already friend Request from Requestee
+    // Returns 5 Requester's friend request is sent to Requestee
+    
+    if(trim($RequesterId) == trim ($RequesteeId)){
+        echo 'Cannot send request to self';
+        return 0; // You cannot send request to your self
+    }
+    $myPdo = connectToDb();
+    $sql = "SELECT UserId, UserName AS Name FROM Users WHERE UserId = :requesteeId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('requesteeId' => $RequesteeId));
+    $data = $pStatment->fetch();
+    if(!$data){
+        echo 'User Does not Exists';
+        return 1; // User Does not Exists
+    }
+    
+    $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :requesterId AND Friend_RequesteeId = :requesteeId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('requesterId' => $RequesterId, 'requesteeId' => $RequesteeId));
+    $data = $pStatment->fetch();
+    if($data){
+        if($data['Status_Code'] == 'accepted'){
+            echo 'Already a friend';
+            return 2; // Already his friend
+        }else{
+            echo 'Already sent friend request';
+            return 3; // already has sent friend request
+        }
+    }
+    
+    $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :requesterId AND Friend_RequesteeId = :requesteeId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('requesterId' => $RequesteeId, 'requesteeId' => $RequesterId));
+    $data = $pStatment->fetch();
+    if($data){
+        if($data['Status_Code'] == 'accepted'){
+            echo 'Already a friend';
+            return 2; // Already his friend
+        }else{
+            $sql = "UPDATE Friendship SET Status_Code = 'accepted' WHERE Friend_RequesterId= :requesterId AND Friend_RequesteeId = :requesteeId";
+            $pStatment = $myPdo->prepare($sql);
+            $pStatment->execute(array('requesterId' => $RequesteeId, 'requesteeId' => $RequesterId));
+            echo 'they become friends';
+            return 4; // They become friends
+        }
+    }
+    $sql = "INSERT INTO Friendship (Friend_RequesterId, Friend_RequesteeId, Status_Code) VALUES (:requesterId, :requesteeId, 'request')";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('requesterId' => $RequesterId, 'requesteeId' => $RequesteeId));
+    echo 'Sent Friend Request';
+    return 5; // Friend Request Sent
 }
 
 ?>
