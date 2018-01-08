@@ -123,4 +123,33 @@ function getFriendsRequests($UserId){
     }
     return $data;
 }
+
+function deleteFriend($UserId, $FriendId){
+    //Returns True on Successfull delete
+    //Returns False on unccessfully delete
+    
+    $flag = null;
+    $myPdo = connectToDb();
+    $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :userId AND Friend_RequesteeId = :friendId AND Status = 'accepted'";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('userId' => $UserId, 'friendId' => $FriendId));
+    $data = $pStatment->fetch();
+    if($data){
+        $sql = "DELETE FROM Friendship WHERE Friend_RequesterId = :userId AND Friend_RequesteeId = :friendId AND Status = 'accepted'";
+        $pStatment = $myPdo->prepare($sql);
+        $pStatment->execute( array('userId' => $UserId, 'friendId' => $FriendId));
+        return TRUE;
+    }
+    $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :friendId AND Friend_RequesteeId = :userId AND Status = 'accepted'";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('userId' => $UserId, 'friendId' => $FriendId));
+    $data = $pStatment->fetch();
+    if($data){
+        $sql = "DELETE FROM Friendship WHERE Friend_RequesterId = :friendId AND Friend_RequesteeId = :userId AND Status = 'accepted'";
+        $pStatment = $myPdo->prepare($sql);
+        $pStatment->execute( array('friendId' => $FriendId, 'userId' => $UserId ));
+        return TRUE;
+    }
+    return FALSE;
+}
 ?>
