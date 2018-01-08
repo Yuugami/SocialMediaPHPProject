@@ -71,13 +71,29 @@ function CreateAlbum($title, $description, $date, $ownerId, $accessibility) {
     return $myPdo->lastInsertId();
 }
 
+// Get Albums from a User Query // Works
+function showAlbums($ownerID) {
+    $myPdo = connectToDb();
+    $sql = "SELECT Title, Date_Updated, Owner_Id, Accessibility_Code, Description
+            FROM album
+            INNER JOIN users ON album.Owner_ID = users.UserId
+            WHERE Owner_ID = :ownerID;";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('ownerID' => $ownerID));
+    $data = $pStatment->fetchAll();
+    return $data;
+}
+
 function getFriendsList($UserId){
     // Returns an containing Friends UserId, Name & Count of Shared Albums
     // $results is an array containing friends
     // Name: ['UserId'], ['Name'], ['AlbumsShared']
 
     $myPdo = connectToDb();
-    $sql = "SELECT Users.UserId, Users.Name, Friendship.Status FROM Users INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status = 'accepted'";
+    $sql = "SELECT Users.UserId, Users.Name, Friendship.Status
+            FROM Users
+            INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId
+            WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status = 'accepted'";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId));
     $data = $pStatment->fetchAll();
@@ -101,7 +117,7 @@ function getFriendsRequests($UserId){
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId));
     $data = $pStatment->fetchAll();
-    
+
     if(!$data){
         return FALSE;
     }

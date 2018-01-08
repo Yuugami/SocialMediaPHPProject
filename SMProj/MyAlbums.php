@@ -33,22 +33,30 @@ if (!isset($_SESSION["LoggedInUserId"])) {
             </tr>
             <?php
             // Print All Albums Portion
-            // Get the name
-            
-            for ($i = 0; $i <= 5; $i++) {
+            // Get the album list
+            $albumList = showAlbums($_SESSION["LoggedInUserId"]);
+            //var_dump($albumList);
+            foreach ($albumList as $album) {
             echo <<< EOT
             <tr>
-            <td>My China Trip</td>
-            <td>2017-09-04</td>
+            <td>$album[Title]</td>
+            <td>$album[Date_Updated]</td>
             <td>14</td>
             <td>
-            <select class="form-control" id="accessibility" name="accessibility" value="<?php echo $accessibility; ?>">
-            <option style="display:none">Please Select Number of Years</option>
-            <option value="private">Accessible Only by Owner</option>
-            <option value="shared">Accessible by Owner and Friends</option>
-            </select>
-            <td><a href="#">delete</a></td>
+                <select class="form-control" id="accessibility" name="accessibility" value="<?php echo $accessibility; ?>">
 EOT;
+                if ($album[Accessibility_Code] == "shared") {
+                    echo "<option value='private'>Accessible Only by Owner</option>";
+                    echo "<option value='shared' selected>Accessible by Owner and Friends</option>";
+                }
+                else {
+                    echo "<option value='private' selected>Accessible Only by Owner</option>";
+                    echo "<option value='shared'>Accessible by Owner and Friends</option>";
+                }
+
+            echo "</select>";
+            echo "</td>";
+            echo "<td><a href='#'>delete</a></td>";
             }
             ?>
         </table>
