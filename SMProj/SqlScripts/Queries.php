@@ -84,6 +84,16 @@ function showAlbums($ownerID) {
     return $data;
 }
 
+// To Do by Faizan for MyAlbums.php
+function saveAccessibilityChanges() {
+    $myPdo = connectToDb();
+}
+
+// To Do by Faizan for MyAlbums.php
+function deleteAlbum() {
+
+}
+
 function getFriendsList($UserId){
     // Returns an containing Friends UserId, Name & Count of Shared Albums
     // $results is an array containing friends
@@ -127,7 +137,7 @@ function getFriendsRequests($UserId){
 function deleteFriend($UserId, $FriendId){
     //Returns True on Successfull delete
     //Returns False on unccessfully delete
-    
+
     $flag = null;
     $myPdo = connectToDb();
     $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :userId AND Friend_RequesteeId = :friendId AND Status = 'accepted'";
