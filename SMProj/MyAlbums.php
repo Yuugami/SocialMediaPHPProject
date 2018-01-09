@@ -41,11 +41,19 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 // Get the album list
                 $albumList = showAlbums($_SESSION["LoggedInUserId"]);
                 $index = 0;
+                if ($_POST) {
+                    foreach ($albumList as $album) {
+                        saveAccessibilityChanges($album[Album_Id], $_POST[accessibility . $index]);
+                        $index++;
+                    }
+                }
+                $index = 0;
+                $albumList = showAlbums($_SESSION["LoggedInUserId"]);
                 //var_dump($albumList);
                 foreach ($albumList as $album) {
                 echo <<< EOT
                 <tr>
-                <td>$album[Title]</td>
+                <td id="$album[Album_Id]"><a href="?albumID=$album[Album_Id]">$album[Title]</a></td>
                 <td>$album[Date_Updated]</td>
                 <td>14</td>
                 <td>
