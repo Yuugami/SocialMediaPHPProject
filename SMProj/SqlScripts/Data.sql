@@ -27,11 +27,11 @@ INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Cod
 ('Personal Pictures', 'Clark\'s personal pictures', '2017-01-12', '0003', 'private'),
 ('Family trip', 'Family trip to China', '2013-11-12', '0003', 'shared');
 
+
 # FriendShip Status
 INSERT INTO FriendshipStatus (Status_Code, Description) VALUES
 ('accepted', 'The request to become a friend has been accepted'),
 ('request', 'A request has been sent to become a friend');
-
 
 
 # Friends
@@ -41,4 +41,23 @@ INSERT INTO Friendship (Friend_RequesterId, Friend_RequesteeId, Status_Code) VAL
 ('0004', '0001', 'request'),
 ('0005', '0001', 'request'),
 ('0005', '0004', 'accepted');
+
+
+# Picture
+INSERT INTO Picture (Album_Id, FileName, Title, Description, Date_Added) VALUES
+( 1, 'AB1_Pic1', 'Album1_Picture1', 'Description of Picture 1', '2018-05-11' ),
+( 1, 'AB1_Pic2', 'Album1_Picture2', 'Description of Picture 2', '2018-05-12' ),
+( 1, 'AB1_Pic3', 'Album1_Picture3', 'Description of Picture 3', '2018-05-13' ),
+
+( 2, 'AB2_Pic1', 'Album2_Picture1', 'Description of Picture 1', '2018-06-11' ),
+( 2, 'AB2_Pic2', 'Album2_Picture2', 'Description of Picture 2', '2018-06-12' ),
+( 2, 'AB2_Pic3', 'Album2_Picture3', 'Description of Picture 3', '2018-06-13' ),
+
+( 4, 'AB1_Pic1', 'Album4_Picture1', 'Description of Picture 1', '2018-05-11' ),
+( 4, 'AB1_Pic2', 'Album4_Picture2', 'Description of Picture 2', '2018-05-12' ),
+( 4, 'AB1_Pic3', 'Album4_Picture3', 'Description of Picture 3', '2018-05-13' ),
+
+( 5, 'AB2_Pic1', 'Album5_Picture1', 'Description of Picture 1', '2018-06-11' ),
+( 5, 'AB2_Pic2', 'Album5_Picture2', 'Description of Picture 2', '2018-06-12' ),
+( 5, 'AB2_Pic3', 'Album5_Picture3', 'Description of Picture 3', '2018-06-13' );
 
