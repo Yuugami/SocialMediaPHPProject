@@ -22,7 +22,7 @@ function ValidateName($name) {
 }
 
 function ValidatePhone($phone) {
-    $phoneregex = "/[2-9][0-9]{2}-[2-9][0-9]{2}-\d{4}/";
+    $phoneregex = "/^\d{3}-\d{3}-\d{4}$/";
     if (trim($phone) && isset($phone)) {
         if (preg_match($phoneregex, $phone, $phonevalid)) {
 
@@ -35,8 +35,20 @@ function ValidatePhone($phone) {
 }
 
 function ValidatePassword($password) {
-    if (trim($password) && isset($password)) {
-
+    $uppercaseregex = "/[A-Z]/";
+    $lowercaseregex = "/[a-z]/";
+    $digitregex = "/\d/";
+    if ($password != null) {
+        if (strlen($password) > 5) {
+            if (preg_match($uppercaseregex, $password, $uppercasevalid)
+                    && preg_match($lowercaseregex, $password, $lowercasevalid)
+                    && preg_match($digitregex, $password, $digitvalid)) {                
+            } else {
+                return "Password Must Contain At Least One Uppercase Character, One Lowercase Character, and One Digit";
+            }
+        } else {
+            return "Password Must be At Least 6 Characters Long";
+        }
     } else {
         return "Password Required";
     }

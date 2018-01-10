@@ -45,7 +45,7 @@ PHP Social Media Project
         $passworderrormsg = ValidatePassword($password);
 
         if (isset($password, $password2)) {
-            $password2 = ($_POST["password2"]);
+            $password2 = trim($_POST["password2"]);
         }
         $password2errormsg = ValidatePassword2($password, $password2);
 
