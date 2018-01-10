@@ -76,10 +76,22 @@ function CreateAlbum($title, $description, $date, $ownerId, $accessibility) {
     return $myPdo->lastInsertId();
 }
 
+// Get a single album
+function getAnAlbum($albumID) {
+    $myPdo = connectToDb();
+    $sql = "SELECT *
+        FROM album
+        WHERE Album_Id = :albumID;";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('albumID' => $albumID));
+    $data = $pStatment->fetch();
+    return $data;
+}
+
 // Get Albums from a User Query // Works
 function showAlbums($ownerID) {
     $myPdo = connectToDb();
-    $sql = "SELECT Title, Date_Updated, Owner_Id, Accessibility_Code, Description
+    $sql = "SELECT Album_Id, Title, Date_Updated, Owner_Id, Accessibility_Code, Description
             FROM album
             INNER JOIN users ON album.Owner_ID = users.UserId
             WHERE Owner_ID = :ownerID;";
@@ -89,7 +101,7 @@ function showAlbums($ownerID) {
     return $data;
 }
 
-// To Do by Faizan for MyAlbums.php
+// To Do by Faizan for MyAlbums.php // Works
 function saveAccessibilityChanges($Album_Id, $Accessibility_Code) {
     // $AlbumId need to integer
     // $Accessibility_Code accepts: shared, private
@@ -107,9 +119,6 @@ function deleteAlbum($AlbumId) {
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('albumId' => $AlbumId) );
 }
-
-
-
 
 //---------------------------- My Friends Page Functions ------------------------------------
 function getFriendsList($UserId){
@@ -182,7 +191,7 @@ function deleteFriend($UserId, $FriendId){
 
 function AcceptFriendRequest($UserId, $RequesterId){
     // Changes status_code to accepted
-    
+
     $myPdo = connectToDb();
     $sql = "UPDATE Friendship SET Friendship.Status_Code = 'accepted' WHERE Friend_RequesteeId = :userId AND Friend_RequesterId = :requesterId";
     $pStatment = $myPdo->prepare($sql);
@@ -192,7 +201,7 @@ function AcceptFriendRequest($UserId, $RequesterId){
 function RejectFriendRequest($UserId, $RequesterId){
     // Removes the entires with only Stats_code = 'Requested'
     // Will not work on removing existing friends (Use deleteFriend Function)
-    
+
     $myPdo = connectToDb();
     $sql = "DELETE FROM Friendship WHERE Friend_RequesteeId = :userId AND Friend_RequesterId = :requesterId AND Status_Code = 'request'";
     $pStatment = $myPdo->prepare($sql);
@@ -206,7 +215,7 @@ function addFriend($RequesterId, $RequesteeId){
     // Returns 3 If Requester has already sent a request to Requestee
     // Returns 4 They becomes friends if Requester has already friend Request from Requestee
     // Returns 5 Requester's friend request is sent to Requestee
-    
+
     if(trim($RequesterId) == trim ($RequesteeId)){
         return 0; // You cannot send request to your self
     }
@@ -218,7 +227,7 @@ function addFriend($RequesterId, $RequesteeId){
     if(!$data){
         return 1; // User Does not Exists
     }
-    
+
     $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :requesterId AND Friend_RequesteeId = :requesteeId";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('requesterId' => $RequesterId, 'requesteeId' => $RequesteeId));
@@ -230,7 +239,7 @@ function addFriend($RequesterId, $RequesteeId){
             return 3; // Already has sent friend request
         }
     }
-    
+
     $sql = "SELECT * FROM Friendship WHERE Friend_RequesterId = :requesterId AND Friend_RequesteeId = :requesteeId";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('requesterId' => $RequesteeId, 'requesteeId' => $RequesterId));
