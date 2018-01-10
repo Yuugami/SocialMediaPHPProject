@@ -208,7 +208,6 @@ function addFriend($RequesterId, $RequesteeId){
     // Returns 5 Requester's friend request is sent to Requestee
     
     if(trim($RequesterId) == trim ($RequesteeId)){
-        echo 'Cannot send request to self';
         return 0; // You cannot send request to your self
     }
     $myPdo = connectToDb();
@@ -217,7 +216,6 @@ function addFriend($RequesterId, $RequesteeId){
     $pStatment->execute(array('requesteeId' => $RequesteeId));
     $data = $pStatment->fetch();
     if(!$data){
-        echo 'User Does not Exists';
         return 1; // User Does not Exists
     }
     
@@ -227,11 +225,9 @@ function addFriend($RequesterId, $RequesteeId){
     $data = $pStatment->fetch();
     if($data){
         if($data['Status_Code'] == 'accepted'){
-            echo 'Already a friend';
             return 2; // Already his friend
         }else{
-            echo 'Already sent friend request';
-            return 3; // already has sent friend request
+            return 3; // Already has sent friend request
         }
     }
     
@@ -241,21 +237,17 @@ function addFriend($RequesterId, $RequesteeId){
     $data = $pStatment->fetch();
     if($data){
         if($data['Status_Code'] == 'accepted'){
-            echo 'Already a friend';
             return 2; // Already his friend
         }else{
             $sql = "UPDATE Friendship SET Status_Code = 'accepted' WHERE Friend_RequesterId= :requesterId AND Friend_RequesteeId = :requesteeId";
             $pStatment = $myPdo->prepare($sql);
             $pStatment->execute(array('requesterId' => $RequesteeId, 'requesteeId' => $RequesterId));
-            echo 'they become friends';
             return 4; // They become friends
         }
     }
     $sql = "INSERT INTO Friendship (Friend_RequesterId, Friend_RequesteeId, Status_Code) VALUES (:requesterId, :requesteeId, 'request')";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('requesterId' => $RequesterId, 'requesteeId' => $RequesteeId));
-    echo 'Sent Friend Request';
     return 5; // Friend Request Sent
 }
-
 ?>
