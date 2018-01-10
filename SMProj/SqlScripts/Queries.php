@@ -76,6 +76,18 @@ function CreateAlbum($title, $description, $date, $ownerId, $accessibility) {
     return $myPdo->lastInsertId();
 }
 
+// Get a single album
+function getAnAlbum($albumID) {
+    $myPdo = connectToDb();
+    $sql = "SELECT *
+        FROM album
+        WHERE Album_Id = :albumID;";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('albumID' => $albumID));
+    $data = $pStatment->fetch();
+    return $data;
+}
+
 // Get Albums from a User Query // Works
 function showAlbums($ownerID) {
     $myPdo = connectToDb();
@@ -89,7 +101,7 @@ function showAlbums($ownerID) {
     return $data;
 }
 
-// To Do by Faizan for MyAlbums.php
+// To Do by Faizan for MyAlbums.php // Works
 function saveAccessibilityChanges($Album_Id, $Accessibility_Code) {
     // $AlbumId need to integer
     // $Accessibility_Code accepts: shared, private

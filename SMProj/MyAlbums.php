@@ -53,7 +53,7 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 foreach ($albumList as $album) {
                 echo <<< EOT
                 <tr>
-                <td id="$album[Album_Id]"><a href="?albumID=$album[Album_Id]">$album[Title]</a></td>
+                <td id="$album[Album_Id]"><a href="MyPictures.php?albumID=$album[Album_Id]">$album[Title]</a></td>
                 <td>$album[Date_Updated]</td>
                 <td>14</td>
                 <td>
