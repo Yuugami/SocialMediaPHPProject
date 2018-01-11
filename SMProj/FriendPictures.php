@@ -59,6 +59,7 @@ if($_POST) {
         <h1><?php echo $_SESSION['friendYouAreVisiting']?>'s Pictures</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
+                <option value="" style="display:none">Please Select Album to Display</option>
                 <?php
                 foreach ($loggedInUsersFriendsAlbums as $anAlbum) {
                     if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
