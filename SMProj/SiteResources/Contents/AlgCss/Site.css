@@ -60,7 +60,17 @@ input[name=btnLogin] {
 .selectedPicture {
     position: relative;
     border: 1px solid black;
-    height: 800px;
+    height: auto;
+}
+
+.thePicture {
+    position: relative;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .descriptionSection, .commentSection, .leaveCommentSection {
@@ -87,20 +97,15 @@ input[name=btnLogin] {
 }
 
 .filmStrip {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    border: 1px solid black;
     display: flex;
-    width: 100%;
-    height: 100px;
     overflow: auto;
+    padding: 0;
 }
 
 .filmStrip .item {
     border: 1px solid black;
-    width: 100px;
+    display: flex;
+    width: 100%;
 }
 
 .filmStrip .item.selectedThumbnail {

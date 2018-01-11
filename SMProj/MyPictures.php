@@ -69,22 +69,20 @@ if (isset($_POST["submit"])) {
                     <div class="thePicture">
                         <img src="/Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
                     </div>
-                    <div class="filmStrip">
-                        <?php
-                        $index = 0;
-                        foreach ($albumsPictures as $picture)
-                        {
-                            if ($picture[Picture_Id] == $selectedPicture[Picture_Id]) {
-                                echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
-                            }
-                            else {
-                                echo "<div class='item'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
-                            }
-
-                            $index++;
-                        }
-                        ?>
-                    </div>
+                    <!--<div class="pictureIcons">
+                        <a href="" id="rotateLeft">
+                            <span class="glyphicon glyphicon-repeat gly-flip-horizontal"></span>
+                        </a>
+                        <a href="" id="rotateRight">
+                            <span class="glyphicon glyphicon-repeat"></span>
+                        </a>
+                        <a href="" id="download">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </a>
+                        <a href="" id="trash">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>-->
                 </div>
                 <div class="descriptionSection col-lg-4">
                     <?php echo "<p><b>Description:</b></p>";
@@ -115,6 +113,22 @@ if (isset($_POST["submit"])) {
                 </div>
                 <div class="addCommentSection col-lg-4">
                     <input type="submit" class="mb-2 btn btn-primary" name="submit" value="Add Comment" />
+                </div>
+                <div class="filmStrip col-lg-8">
+                    <?php
+                    $index = 0;
+                    foreach ($albumsPictures as $picture)
+                    {
+                        if ($picture[Picture_Id] == $selectedPicture[Picture_Id]) {
+                            echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                        }
+                        else {
+                            echo "<div class='item'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                        }
+
+                        $index++;
+                    }
+                    ?>
                 </div>
             </div>
         </form>    
