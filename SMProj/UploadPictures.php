@@ -41,7 +41,8 @@ if (isset($_POST["submit"])) {
     }
     
     if (isset($title)) {
-        $title = trim($_POST["title"]);        
+        $title = trim($_POST["title"]);
+        $title = str_replace(array( '<', '>' ), '', $title);
     }
 
     if (isset($description)) {
