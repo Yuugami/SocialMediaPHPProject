@@ -56,7 +56,9 @@ if($_POST) {
 ?>
 <body>
     <div class="container">
-        <h1><?php echo $_SESSION['friendYouAreVisiting']?>'s Pictures</h1>
+        <h1><?php echo 
+        $friend = htmlspecialchars($_SESSION['friendYouAreVisiting']);
+        $_SESSION['friendYouAreVisiting']?>'s Pictures</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
                 <?php
