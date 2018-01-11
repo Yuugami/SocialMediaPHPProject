@@ -16,7 +16,9 @@ if (!isset($_SESSION["LoggedInUserId"])) {
         <h1 style="text-align: center">Add Friend</h1>
         <br>
         <p class="text-center">
-            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            Welcome <b><?php
+                        $Name = htmlspecialchars($_SESSION[LoggedInUserName]);
+                        echo "$Name"; ?></b>! 
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <p class="text-center">Enter the ID of the user you want to add as a friend.</p><br>
