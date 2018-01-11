@@ -42,7 +42,9 @@ if ($_POST) {
         <h1 style="text-align: center">Create New Album</h1>
         <br>
         <p class="text-center">
-            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>! 
+            Welcome <b><?php
+                        $Name = $_SESSION[LoggedInUserName];
+                        echo "$Name"; ?></b>! 
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <br>
