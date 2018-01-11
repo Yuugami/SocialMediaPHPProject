@@ -195,7 +195,7 @@ function getCommentsDb($PictureId){
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('pictureId' => $PictureId));
     $data = $pStatment->fetchAll();
-    usort($data, "sortFunction");
+    usort($data, "sortFunction"); 
     return $data;
 }
 
