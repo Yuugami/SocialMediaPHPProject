@@ -120,6 +120,17 @@ function deleteAlbum($AlbumId) {
     $pStatment->execute( array('albumId' => $AlbumId) );
 }
 
+function getAlbumsPictures($AlbumId) {
+    $myPdo = connectToDb();
+    $sql = "SELECT *
+            FROM picture
+            WHERE Album_Id = :albumId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('albumId' => $AlbumId));
+    $data = $pStatment->fetchAll();
+    return ($data);
+}
+
 //---------------------------- Pictures functions -------------------------------------------
 
 function UploadPictureDataDb($Album_Id, $FileName, $Tite, $Description, $Date){
