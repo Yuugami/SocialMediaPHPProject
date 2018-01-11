@@ -13,21 +13,27 @@ if (!isset($_SESSION["LoggedInUserId"])) {
 
 if ($_POST) {
     if ($_POST[Defriend]) {
-        $friendsToDelete = $_POST[friend];
-        foreach ($friendsToDelete as $goodByeFriend) {
-            deleteFriend($_SESSION["LoggedInUserId"], $goodByeFriend);
+        if ($_POST[friend] != null) {
+            $friendsToDelete = $_POST[friend];
+            foreach ($friendsToDelete as $goodByeFriend) {
+                deleteFriend($_SESSION["LoggedInUserId"], $goodByeFriend);
+            }    
         }
     }
 
     if ($_POST[Accept]) {
-        foreach ($_POST[friend] as $friend) {
-            AcceptFriendRequest($_SESSION["LoggedInUserId"], $friend);
+        if ($_POST[friend] != null) {
+            foreach ($_POST[friend] as $friend) {
+                AcceptFriendRequest($_SESSION["LoggedInUserId"], $friend);
+            }            
         }
     }
 
     if ($_POST[Reject]) {
-        foreach ($_POST[friend] as $friend) {
-            RejectFriendRequest($_SESSION["LoggedInUserId"], $friend);
+        if ($_POST[friend] != null) {
+            foreach ($_POST[friend] as $friend) {
+                RejectFriendRequest($_SESSION["LoggedInUserId"], $friend);
+            }            
         }
     }
 }
@@ -69,7 +75,7 @@ if ($_POST) {
                     $friendsAlbumShared = htmlspecialchars($friend[AlbumsShared]);
                     echo <<<EOT
                     <tr>
-                        <td><a href='FriendsPictures.php?friendID=$friendsID'>$friendsName</a></td>
+                        <td><a href='FriendPictures.php?friendID=$friendsID'>$friendsName</a></td>
                         <td>$friendsAlbumShared</td>
                         <td>
                             <input type="checkbox" name="friend[]" value='$friendsID'/>

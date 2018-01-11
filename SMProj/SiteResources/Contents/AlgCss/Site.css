@@ -126,7 +126,7 @@ input[name=btnLogin] {
 .filmStrip .item {
     border: 1px solid black;
     display: flex;
-    width: 100%;
+    width: 100px;
 }
 
 .filmStrip .item.selectedThumbnail {
