@@ -63,10 +63,6 @@ input[name=btnLogin] {
     height: 800px;
 }
 
-.selectedThumbnail {
-    border: 1px solid blue;
-}
-
 .descriptionSection, .commentSection, .leaveCommentSection {
     border: 1px solid black;
     height: auto;
@@ -105,6 +101,10 @@ input[name=btnLogin] {
 .filmStrip .item {
     border: 1px solid black;
     width: 100px;
+}
+
+.filmStrip .item.selectedThumbnail {
+    border: 1px solid blue;
 }
 
 /* Faizan's CSS Section*/

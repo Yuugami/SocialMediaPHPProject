@@ -63,13 +63,19 @@ if (isset($_POST["submit"])) {
             </div>
             <div class="row">
                 <div class="selectedPicture col-lg-8">
-                    <div class="thePicture"><img src="/Images/OwnerID/AlbumID/Original/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" /></div>
+                    <div class="thePicture"><img src="/Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" /></div>
                     <div class="filmStrip">
                         <?php
                         $index = 0;
                         foreach ($albumsPictures as $picture)
                         {
-                            echo "<div class='item'><img id='$picture[Picture_Id]' src='/Images/OwnerID/AlbumID/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            if ($picture[Picture_Id] == $selectedPicture[Picture_Id]) {
+                                echo "<div class='item selectedThumbnail'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            }
+                            else {
+                                echo "<div class='item'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            }
+
                             $index++;
                         }
                         ?>

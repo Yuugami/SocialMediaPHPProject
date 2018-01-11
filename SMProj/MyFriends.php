@@ -44,10 +44,11 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 //var_dump($listOfFriends);
                 foreach ($listOfFriends as $friend) {
                     $friendsName = htmlspecialchars($friend[Name]);
+                    $friendsID = htmlspecialchars($friend[UserId]);
                     $friendsAlbumShared = htmlspecialchars($friend[AlbumsShared]);
                     echo <<<EOT
                     <tr>
-                        <td>$friendsName</td>
+                        <td><a href="FriendsPictures.php?friendID=$friendsId">$friendsName</a></td>
                         <td>$friendsAlbumShared</td>
                         <td>
                             <input type="checkbox" name="friend$index" value="value$index" />
