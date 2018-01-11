@@ -135,14 +135,14 @@ if (isset($_POST["submit"])) {
             <div class="form-group row">
                 <label for="title" class="col-lg-2 col-lg-offset-1 control-label" style="text-align: left">Title:</label>
                 <div class="col-lg-5">
-                    <input type="text" class="form-control" id="title" name="title" value="<?php echo $title; ?>">
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>   
             </div>
                 
             <div class="form-group row">
                 <label for="description" class="col-lg-2 col-lg-offset-1 control-label" style="text-align: left">Description:</label>
                 <div class="col-lg-5">
-                    <textarea rows="6" type="" class="form-control" id="description" name="description"><?php if(isset($_POST['description'])) { echo $_POST['description']; } ?></textarea>
+                    <textarea rows="6" type="" class="form-control" id="description" name="description"></textarea>
                 </div>                        
             </div>
             <br>
