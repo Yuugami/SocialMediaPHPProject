@@ -26,10 +26,12 @@ $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
             <?php
             foreach ($loggedInUsersAlbums as $anAlbum) {
                 if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
-                    echo "<option value='$anAlbum[Album_Id]' selected>$anAlbum[Title]</option>";
+                    $albumTitle = htmlspecialchars($anAlbum[Title]);
+                    echo "<option value='$anAlbum[Album_Id]' selected>$albumTitle</option>";
                 }
                 else {
-                    echo "<option value='$anAlbum[Album_Id]'>$anAlbum[Title]</option>";
+                    $albumTitle = htmlspecialchars($anAlbum[Title]);
+                    echo "<option value='$anAlbum[Album_Id]'>$albumTitle</option>";
                 }
             }
             $albumsPictures = getAlbumsPictures($_GET[albumID]);
