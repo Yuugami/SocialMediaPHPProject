@@ -16,6 +16,7 @@ if ($_GET) {
     $fileName = getAPictureInfo($_GET[photoID]);
     $fileName = $fileName[FileName];
     $path = "./Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
+    var_dump($path);
 
     if ($_GET[action] == "rotateLeft") {
         $direction = 90;
@@ -33,7 +34,8 @@ if ($_GET) {
 
     if ($_GET[action] == "delete") {
         deletePictureFromDb($_GET[photoID]);
-        deletePicture($path);
+        unlink($path);
+        //deletePicture($path);
     }
 
     if ($_GET[action]) {
@@ -108,7 +110,7 @@ if($_POST) {
             <div class="row">
                 <div class="selectedPicture col-lg-8">
                     <div class="thePicture">
-                        <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo htmlspecialchars($selectedPicture[FileName]) ?>" alt="Picture Goes Here" />
+                        <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo htmlspecialchars($selectedPicture[FileName]) ?>?<?php echo time() ?>" alt="Picture Goes Here" />
                     </div>
                     <div class="pictureIcons">
                         <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=rotateLeft" id="rotateLeft">
@@ -162,10 +164,10 @@ if($_POST) {
                     foreach ($albumsPictures as $picture)
                     {
                         if ($picture[Picture_Id] == $selectedPicture[Picture_Id]) {
-                            echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='./Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='./Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]?".time()."' alt='A Picture $index' /></div>";
                         }
                         else {
-                            echo "<div class='item'><img id='$picture[Picture_Id]' src='./Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            echo "<div class='item'><img id='$picture[Picture_Id]' src='./Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]?".time()."' alt='A Picture $index' /></div>";
                         }
 
                         $index++;
