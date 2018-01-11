@@ -39,10 +39,6 @@
   <ItemGroup>
     <Folder Include="CommonFiles\" />
     <Folder Include="Pictures\" />
-    <Folder Include="Pictures\11\" />
-    <Folder Include="Pictures\11\Album\" />
-    <Folder Include="Pictures\11\Original\" />
-    <Folder Include="Pictures\11\Thumbnail\" />
     <Folder Include="SiteResources\" />
     <Folder Include="SiteResources\Contents\" />
     <Folder Include="SiteResources\Contents\AlgCss\" />

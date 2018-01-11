@@ -10,6 +10,12 @@ if (!isset($_SESSION["LoggedInUserId"])) {
     header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI']));
     die();
 }
+
+if ($_GET[deleteAlbumID]) {
+    deleteAlbum($_GET[deleteAlbumID]);
+    removeDirectory("Pictures/$_GET[deleteAlbumID]");
+}
+
 ?>
 <body>
     <div class="container">
@@ -71,7 +77,7 @@ EOT;
 
                     echo "</select>";
                     echo "</td>";
-                    echo "<td><a href='#'>delete</a></td>";
+                    echo "<td><a href='?deleteAlbumID=$album[Album_Id]'>delete</a></td>";
                     $index++;
                 }
                 ?>
