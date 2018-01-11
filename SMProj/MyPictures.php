@@ -16,7 +16,6 @@ if ($_GET) {
     $fileName = getAPictureInfo($_GET[photoID]);
     $fileName = $fileName[FileName];
     $path = "./Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
-    var_dump($path);
 
     if ($_GET[action] == "rotateLeft") {
         $direction = 90;
