@@ -157,7 +157,7 @@ function getPicturesInfoDb($albumId){
     return $data;
 }
 
-function getCommetsDb($PictureId){
+function getCommentsDb($PictureId){
     // Returns The following:
     // $data['Comment_Id']
     // $data['Author_Id']
