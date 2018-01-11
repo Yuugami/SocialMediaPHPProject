@@ -20,7 +20,37 @@ if (!isset($_SESSION["LoggedInUserId"])) {
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <p class="text-center">Enter the ID of the user you want to add as a friend.</p><br>
+        <?php
+        if ($_POST) {
+            echo "<p class='error' style='text-align: center'>";
+            $code = addFriend($_SESSION["LoggedInUserId"], $_POST["id"]);
 
+            switch($code) {
+                case 0:
+                    echo "You can't send a request to yourself!";
+                    break;
+                case 1:
+                    echo "This user does not exist.";
+                    break;
+                case 2:
+                    echo "This user is already your friend! Go message him!";
+                    break;
+                case 3:
+                    echo "You've already sent a request. Be patient.";
+                    break;
+                case 4:
+                    echo "This user sent you a request as well! You guys are now friends!";
+                    break;
+                case 5:
+                    echo "Request sent!";
+                    break;
+                default:
+                    echo "If you get here, you're an actual shit.";
+
+            }
+            echo "</p>";
+        }
+        ?>
         <form class="form-horizontal col-lg-offset-2" id="depositForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="form-group">
                 <label for="id" class="col-lg-1 col-lg-offset-1 control-label" style="text-align: left">ID:</label>
