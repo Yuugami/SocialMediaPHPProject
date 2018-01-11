@@ -25,7 +25,10 @@ if ($_GET[deleteAlbumID]) {
             <p class="text-center">
                 Welcome
                 <b>
-                    <?php echo "$_SESSION[LoggedInUserName]"; ?>
+                    <?php
+                    $Name = htmlspecialchars($_SESSION[LoggedInUserName]);
+                    echo "$Name"; 
+                    ?>
                 </b>!
             (Not you? Change users
                 <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
