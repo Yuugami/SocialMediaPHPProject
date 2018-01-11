@@ -40,7 +40,16 @@ function checkUserId($UserId){
         return FALSE; // If User does not exist
 }
 
-
+function getUserName($UserId) {
+    $myPdo = connectToDb();
+    $sql = 'SELECT UserName
+            FROM users
+            WHERE UserId = :userId';
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('userId' => $UserId));
+    $data = $pStatment->fetch();
+    return ($data);
+}
 
 
 //----------------------------------- Albums Functions -------------------------------------------------

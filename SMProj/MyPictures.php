@@ -60,7 +60,18 @@ $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
             <div class="descriptionSection col-lg-4">
                 <?php echo "$selectedPicture[Description]"?>
             </div>
-            <div class="commentSection col-lg-4">Comments Goes Here</div>
+            <div class="commentSection col-lg-4">
+                <?php
+                $comments = getCommentsDb($selectedPicture[Picture_Id]);
+                foreach ($comments as $aComment) {
+                    echo "<p>";
+                    $name = getUserName($aComment[Author_Id]);
+                    $name = $name[UserName];
+                    echo "$name ";
+                    echo "($aComment[Comment_Date]): $aComment[Comment_Text]</p>";
+                }
+                ?>
+            </div>
             <div class="leaveCommentSection col-lg-4"><textarea placeholder="Leave Comment..."></textarea></div>
             <div class="addCommentSection col-lg-4">
                 <input type="submit" class="mb-2 btn btn-primary" name="name" value="Add Comment" />
