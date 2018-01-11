@@ -77,7 +77,7 @@ EOT;
 
                     echo "</select>";
                     echo "</td>";
-                    echo "<td><a href='?deleteAlbumID=$album[Album_Id]'>delete</a></td>";
+                    echo "<td><a class='delete' href='?deleteAlbumID=$album[Album_Id]'>delete</a></td>";
                     $index++;
                 }
                 ?>
@@ -86,4 +86,11 @@ EOT;
         </form>
     </div>
     <?php include ("./CommonFiles/Footer.php"); ?>
+    <script>
+        $(document).ready(function () {
+            $(".delete").on("click", function () {
+                return confirm("Are you sure? All pictures in the album will be deleted as well!");
+            });
+        });
+    </script>
 </body>
