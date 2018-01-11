@@ -16,6 +16,16 @@ if ($_GET) {
     $fileName = getAPictureInfo($_GET[photoID]);
     $fileName = $fileName[FileName];
     $path = "../Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
+
+    if ($_GET[action] == "rotateLeft") {
+    }
+
+    if ($_GET[action] == "rotateRight") {
+    }
+
+    if ($_GET[action] == "download") {
+    }
+
     if ($_GET[action] == "delete") {
         deletePictureFromDb($_GET[photoID]);
         deletePicture($path);
