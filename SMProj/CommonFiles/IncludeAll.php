@@ -1,6 +1,6 @@
 <?php
 // Include important pages here
-include_once("CommonFiles/ConstantsAndSettigs.php");
+include_once("CommonFiles/ConstantsAndSettings.php");
 include_once("Classes.php");
 // ================ Models ================
 
