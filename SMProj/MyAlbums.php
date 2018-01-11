@@ -51,11 +51,12 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 $albumList = showAlbums($_SESSION["LoggedInUserId"]);
                 //var_dump($albumList);
                 foreach ($albumList as $album) {
+                $numOfPicInAlbum = countPicturesInAlbum($album[Album_Id]);
                 echo <<< EOT
                 <tr>
                 <td id="$album[Album_Id]"><a href="MyPictures.php?albumID=$album[Album_Id]">$album[Title]</a></td>
                 <td>$album[Date_Updated]</td>
-                <td>14</td>
+                <td>$numOfPicInAlbum</td>
                 <td>
                     <select class="form-control" id="accessibility$index" name="accessibility$index">
 EOT;

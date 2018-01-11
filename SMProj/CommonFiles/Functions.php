@@ -42,7 +42,7 @@ function ValidatePassword($password) {
         if (strlen($password) > 5) {
             if (preg_match($uppercaseregex, $password, $uppercasevalid)
                     && preg_match($lowercaseregex, $password, $lowercasevalid)
-                    && preg_match($digitregex, $password, $digitvalid)) {                
+                    && preg_match($digitregex, $password, $digitvalid)) {
             } else {
                 return "Password Must Contain At Least One Uppercase Character, One Lowercase Character, and One Digit";
             }
@@ -83,6 +83,17 @@ function ValidateAlbum($album) {
     } else {
         return "Album Required";
     }
+}
+
+// MyAlbums.php Functions
+
+function removeDirectory($path) {
+    $files = glob($path . '/*');
+    foreach ($files as $file) {
+        is_dir($file) ? removeDirectory($file) : unlink($file);
+    }
+    rmdir($path);
+    return;
 }
 
 ?>
