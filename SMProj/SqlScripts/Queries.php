@@ -204,10 +204,20 @@ function getFriendsList($UserId){
     // Name: ['UserId'], ['Name'], ['AlbumsShared']
 
     $myPdo = connectToDb();
+    //$sql = "SELECT Users.UserId, Users.UserName As Name, Friendship.Status_Code
+    //        FROM Users
+    //        INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId
+    //        WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted'";
     $sql = "SELECT Users.UserId, Users.UserName As Name, Friendship.Status_Code
             FROM Users
-            INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId
-            WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted'";
+            INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId OR Users.UserId = Friendship.Friend_RequesterId
+            WHERE
+            (
+				(Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted')
+				OR
+				(Friendship.Friend_RequesterId != :userId AND Friendship.Friend_RequesteeId = :userId AND Friendship.Status_Code = 'accepted')
+            )
+            AND (UserId != :userId)";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId));
     $data = $pStatment->fetchAll();
