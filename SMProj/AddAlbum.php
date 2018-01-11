@@ -13,7 +13,7 @@ if (!isset($_SESSION["LoggedInUserId"])) {
 // On Post...
 // 1. Validate
 // 2. Add To Databse
-if ($_POST) {
+if (isset($_POST["submit"])) {
     /* Section One */
     $error = false;
     if (!validateAddAlbum($_POST[title])) {
