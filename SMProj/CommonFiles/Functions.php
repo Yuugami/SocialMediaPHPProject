@@ -202,9 +202,9 @@ function removeDirectory($path) {
 function rotatePicture($path, $direction, $albumID) {
     $fileName = basename($path); // Name of FIle
     $originalPath = $path; // Original Picture
-    $albumPath = "../Pictures/" . $albumID . "/Album/" . $fileName;
+    $albumPath = "./Pictures/" . $albumID . "/Album/" . $fileName;
     $thumbPath = "." . ALBUM_THUMBNAILS_DIR . '/' . $fileName;
-    $thumbPath = "../Pictures/" . $albumID ."/Thumbnail/" . $fileName;
+    $thumbPath = "./Pictures/" . $albumID . "/Thumbnail/" . $fileName;
     $pathInfoOriginal = pathinfo($originalPath); // Get ALL the info
     $extOriginal = $pathInfoOriginal['extension']; // Get the extension of that picture
 
@@ -250,8 +250,6 @@ function rotatePicture($path, $direction, $albumID) {
     imagedestroy($originalType);
     imagedestroy($albumType);
     imagedestroy($thumbType);
-
-    header("Refresh:0");
 }
 
 function downloadPicture($path) {

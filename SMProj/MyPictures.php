@@ -18,13 +18,13 @@ if ($_GET) {
     $path = "./Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
 
     if ($_GET[action] == "rotateLeft") {
-        $direction = 270;
+        $direction = 90;
         rotatePicture($path, $direction, $_GET[albumID]);
     }
 
     if ($_GET[action] == "rotateRight") {
-        $direction = 90;
-        rotatePicture($path, $direction);
+        $direction = 270;
+        rotatePicture($path, $direction, $_GET[albumID]);
     }
 
     if ($_GET[action] == "download") {
@@ -34,6 +34,13 @@ if ($_GET) {
     if ($_GET[action] == "delete") {
         deletePictureFromDb($_GET[photoID]);
         deletePicture($path);
+    }
+
+    if ($_GET[action]) {
+        $currentURL = $_SERVER[REQUEST_URI];
+        $whatToDelete = strpos($currentURL, "&action");
+        $newURL = substr_replace($currentURL,"", $whatToDelete);
+        header("Location: " . $newURL);
     }
 }
 
