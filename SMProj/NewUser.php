@@ -25,11 +25,13 @@ PHP Social Media Project
     if (isset($_POST["submit"])) {
         if (isset($studentid)) {
             $studentid = trim($_POST["studentid"]);
+            $studentid = str_replace(array( '<', '>' ), '', $studentid);            
         }
         $studentiderrormsg = ValidateStudentID($studentid);
 
         if (isset($name)) {
             $name = trim($_POST["name"]);
+            $name = str_replace(array( '<', '>' ), '', $name);
         }
         $nameerrormsg = ValidateName($name);
 
@@ -37,7 +39,6 @@ PHP Social Media Project
             $phone = trim($_POST["phone"]);
         }
         $phoneerrormsg = ValidatePhone($phone);
-        $phone = str_replace("-", "", $phone);
 
         if (isset($password)) {
             $password = trim($_POST["password"]);

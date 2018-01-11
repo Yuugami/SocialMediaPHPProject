@@ -51,6 +51,7 @@ if (isset($_POST["submit"])) {
                 foreach ($loggedInUsersAlbums as $anAlbum) {
                     if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
                         $albumTitle = htmlspecialchars($anAlbum[Title]);
+                        $albumTitle = htmlspecialchars($albumTitle);
                         echo "<option value='$anAlbum[Album_Id]' selected>$albumTitle</option>";
                     }
                     else {
@@ -68,13 +69,15 @@ if (isset($_POST["submit"])) {
             </select>
             <div class="row">
                 <h2 class="col-lg-8 col-lg-offset-3">
-                    <?php echo $selectedAlbum[Title]?>
+                    <?php 
+                    $selectedAlbumTitle = htmlspecialchars($selectedAlbum[Title]);
+                    echo $selectedAlbumTitle ?>
                 </h2>
             </div>
             <div class="row">
                 <div class="selectedPicture col-lg-8">
                     <div class="thePicture">
-                        <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
+                        <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo htmlspecialchars($selectedPicture[FileName]) ?>" alt="Picture Goes Here" />
                     </div>
                     <div class="pictureIcons">
                         <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=rotateLeft" id="rotateLeft">
@@ -93,7 +96,8 @@ if (isset($_POST["submit"])) {
                 </div>
                 <div class="descriptionSection col-lg-4">
                     <?php echo "<p><b>Description:</b></p>";
-                    echo "$selectedPicture[Description]"?>
+                    $selectedPic = htmlspecialchars($selectedPicture[Description]);
+                    echo "$selectedPic"?>
                 </div>
                 <div class="commentSection col-lg-4">
                     <?php
