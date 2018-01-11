@@ -1,12 +1,14 @@
 use CST8257;
 
+
+# Password is "Password1"
 #User Table Data
 INSERT INTO Users (UserId, UserName, Phone, UserPassword) VALUES 
-('0001', 'Jon Snow', '6131234567', 'password1'),
-('0002', 'Barry Allen', '6131234567', 'password1'),
-('0003', 'Clark Kent', '6131234567', 'password1'),
-('0004', 'Reverse Flash', '6131234567', 'password1'),
-('0005', 'For Darksied', '6131234567', 'password1');
+('0001', 'Jon Snow', '6131234567', '70ccd9007338d6d81dd3b6271621b9cf9a97ea00'),
+('0002', 'Barry Allen', '6131234567', '70ccd9007338d6d81dd3b6271621b9cf9a97ea00'),
+('0003', 'Clark Kent', '6131234567', '70ccd9007338d6d81dd3b6271621b9cf9a97ea00'),
+('0004', 'Reverse Flash', '6131234567', '70ccd9007338d6d81dd3b6271621b9cf9a97ea00'),
+('0005', 'For Darksied', '6131234567', '70ccd9007338d6d81dd3b6271621b9cf9a97ea00');
 
 
 #Accessibility Data

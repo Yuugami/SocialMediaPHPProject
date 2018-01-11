@@ -10,6 +10,7 @@ function connectToDb(){
 // Login Query function // Works
 function loginQuery($UserId, $Password) {
     $myPdo = connectToDb();
+    $Password = sha1($Password);
     $sql = 'SELECT UserId, UserName AS Name FROM Users WHERE UserId = :userId AND UserPassword = :password';
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('userId' => $UserId, 'password' => $Password));
@@ -23,6 +24,8 @@ function loginQuery($UserId, $Password) {
 // New User Query // Works
 function NewUser($UserId, $Name, $Phone, $Password){
     $myPdo = connectToDb();
+    $Password = sha1($Password);
+    var_dump($myPdo);
     $sql = "INSERT INTO Users (UserId, UserName, Phone, UserPassword) VALUES (:userId, :name, :phone, :password)";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId, 'name' => $Name, 'phone' => $Phone, 'password' => $Password));
