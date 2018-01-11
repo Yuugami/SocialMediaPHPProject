@@ -118,11 +118,11 @@ function resamplefile($path, $destination, $maxwidth, $maxheight)
     {
         mkdir($destination);
     }
-    
+
     $details = getimagesize($path);
-    
+
     $originalresource = null;
-    
+
     if ($details[2] == IMAGETYPE_JPEG)
     {
         $originalresource = imagecreatefromjpeg($path);
@@ -135,28 +135,28 @@ function resamplefile($path, $destination, $maxwidth, $maxheight)
     {
         $originalresource = imagecreatefromgif($path);
     }
-    
+
     $widthratio = $details[0] / $maxwidth;
     $heightratio = $details[1] / $maxheight;
     $ratio = max($widthratio, $heightratio);
-    
+
     $newwidth = $details[0] / $ratio;
     $newheight = $details[1] / $ratio;
-    
+
     $newimage = imagecreatetruecolor($newwidth, $newheight);
-    
+
     $success = imagecopyresampled($newimage, $originalresource, 0, 0, 0, 0, $newwidth, $newheight, $details[0], $details[1]);
-    
+
     if (!$success)
     {
         imagedestroy($newimage);
         imagedestroy($originalresource);
         return "";
     }
-    
+
     $pathinfo = pathinfo($path);
     $newpath = $destination."/".$pathinfo["filename"];
-    
+
     if ($details[2] == IMAGETYPE_JPEG)
     {
         $newpath .= ".jpg";
@@ -172,10 +172,10 @@ function resamplefile($path, $destination, $maxwidth, $maxheight)
         $newpath .= ".gif";
         $success = imagegif($newimage, $newpath);
     }
-    
+
     imagedestroy($newimage);
     imagedestroy($originalresource);
-    
+
     if (!$success)
     {
         return "";
@@ -195,6 +195,91 @@ function removeDirectory($path) {
     }
     rmdir($path);
     return;
+}
+
+// MyPictures.php
+
+function rotatePicture($path, $direction) {
+    $fileName = basename($path); // Name of FIle
+    $originalPath = ORIGINAL_PICTURES_DIR . '/' . $fileName; // Original Picture
+    $albumPath = ALBUM_PICTURES_DIR . '/' . $fileName;
+    $thumbPath = ALBUM_THUMBNAILS_DIR . '/' . $fileName;
+    $pathInfoOriginal = pathinfo($originalPath); // Get ALL the info
+    $extOriginal = $pathInfoOriginal['extension']; // Get the extension of that picture
+
+    if ($extOriginal == "png") {
+        $originalType = imagecreatefrompng($originalPath);
+        $albumType = imagecreatefrompng($albumPath);
+        $thumbType = imagecreatefrompng($thumbPath);
+    }
+    elseif ($extOriginal == "jpg" || $extOriginal == "jpeg") {
+        $originalType = imagecreatefromjpeg($originalPath);
+        $albumType = imagecreatefromjpeg($albumPath);
+        $thumbType = imagecreatefromjpeg($thumbPath);
+    }
+    elseif ($extOriginal == "gif") {
+        $originalType = imagecreatefromgif($originalPath);
+        $albumType = imagecreatefromgif($albumPath);
+        $thumbType = imagecreatefromgif($thumbPath);
+    }
+
+    $originalRotate = imagerotate($originalType, $direction, 0);
+    $albumRotate = imagerotate($albumType, $direction, 0);
+    $thumbRotate = imagerotate($thumbType, $direction, 0);
+
+    if ($extOriginal == "png") {
+        imagepng($originalRotate, $originalPath);
+        imagepng($albumRotate, $albumPath);
+        imagepng($thumbRotate, $thumbPath);
+    }
+    elseif ($extOriginal == "jpg" || $extOriginal == "jpeg") {
+        imagejpeg($originalRotate, $originalPath);
+        imagejpeg($albumRotate, $albumPath);
+        imagejpeg($thumbRotate, $thumbPath);
+    }
+    elseif ($extOriginal == "gif") {
+        imagegif($originalRotate, $originalPath);
+        imagegif($albumRotate, $albumPath);
+        imagegif($thumbRotate, $thumbPath);
+    }
+
+    imagedestroy($originalRotate);
+    imagedestroy($albumRotate);
+    imagedestroy($thumbRotate);
+    imagedestroy($originalType);
+    imagedestroy($albumType);
+    imagedestroy($thumbType);
+
+    header("Location: MyPictures.php");
+}
+
+function downloadPicture($path) {
+    $fileName = basename($path);
+    $originalPath = './img/OriginalPictures/' . $fileName;
+    $fileLength = filesize($originalPath);
+
+    header("Content-Type: application/octet-stream");
+    header("Content-Disposition: attachment; filename = \"$fileName\" ");
+    header("Content-Length: $fileLength" );
+    header("Content-Description: File Transfer");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate");
+    header("Pragma: private");
+
+    ob_clean();
+    flush();
+    readfile($originalPath);
+    flush();
+}
+
+// Testing
+
+function deletePicture($path) {
+    $fileName = basename($path);
+    unlink("." . ORIGINAL_PICTURES_DIR . "/" . $fileName);
+    unlink("." . ALBUM_PICTURES_DIR . "/" . $fileName);
+    unlink("." . ALBUM_THUMBNAILS_DIR . "/" . $fileName);
+    header("Location: MyPictures.php");
 }
 
 ?>

@@ -13,6 +13,13 @@ if (!isset($_SESSION["LoggedInUserId"])) {
 
 if ($_GET) {
     $selectedAlbum = getAnAlbum($_GET[albumID]);
+    $fileName = getAPictureInfo($_GET[photoID]);
+    $fileName = $fileName[FileName];
+    $path = "../Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
+    if ($_GET[action] == "delete") {
+        deletePictureFromDb($_GET[photoID]);
+        deletePicture($path);
+    }
 }
 
 $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
@@ -70,16 +77,16 @@ if (isset($_POST["submit"])) {
                         <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
                     </div>
                     <div class="pictureIcons">
-                        <a href="" id="rotateLeft">
+                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=rotateLeft" id="rotateLeft">
                             <span class="glyphicon glyphicon-repeat gly-flip-horizontal"></span>
                         </a>
-                        <a href="" id="rotateRight">
+                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=rotateRight" id="rotateRight">
                             <span class="glyphicon glyphicon-repeat"></span>
                         </a>
-                        <a href="" id="download">
+                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=download" id="download">
                             <span class="glyphicon glyphicon-download-alt"></span>
                         </a>
-                        <a href="" id="trash">
+                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=delete" id="trash">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </div>
@@ -167,7 +174,9 @@ if (isset($_POST["submit"])) {
             });
 
             $(".selectedPicture").hover(function () {
-                $(".pictureIcons").toggle();
+                $(".pictureIcons").show();
+            }, function () {
+                $(".pictureIcons").hide();
             });
         });
     </script>

@@ -132,6 +132,16 @@ function deleteAlbum($AlbumId) {
     $pStatment->execute( array('albumId' => $AlbumId));
 }
 
+// Deletes a single picture
+function deletePictureFromDb($PictureId) {
+    $myPdo = connectToDb();
+    $sql = "DELETE
+            FROM picture
+            WHERE Picture_Id = :pictureID;";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('pictureID' => $PictureId));
+}
+
 function getAlbumsPictures($AlbumId) {
     $myPdo = connectToDb();
     $sql = "SELECT *
@@ -195,7 +205,7 @@ function getCommentsDb($PictureId){
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('pictureId' => $PictureId));
     $data = $pStatment->fetchAll();
-    usort($data, "sortFunction"); 
+    usort($data, "sortFunction");
     return $data;
 }
 
@@ -204,6 +214,18 @@ function saveCommentsDb($Author_Id, $Picture_Id, $Comment_Text, $Comment_Date){
     $sql = "INSERT INTO Comments (Author_Id, Picture_Id, Comment_Text, Comment_Date) VALUES (:author_Id, :picture_Id, :comment_Text, :comment_Date)";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('author_Id' => $Author_Id, 'picture_Id' => $Picture_Id, 'comment_Text' => $Comment_Text, 'comment_Date' => $Comment_Date));
+}
+
+// Gets all the info for one picture
+function getAPictureInfo($Picture_Id) {
+    $myPdo = connectToDb();
+    $sql = "SELECT *
+            FROM picture
+            WHERE Picture_Id = :picture_id";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('picture_id' => $Picture_Id));
+    $data = $pStatment->fetch();
+    return $data;
 }
 
 //---------------------------- My Friends Page Functions ------------------------------------
@@ -246,7 +268,7 @@ function getFriendsRequests($UserId){
     // Returns False on no FriendRequests
 
     $myPdo = connectToDb();
-    $sql = "SELECT Users.UserId, Users.UserName AS Name, Friendship.Status_Code 
+    $sql = "SELECT Users.UserId, Users.UserName AS Name, Friendship.Status_Code
             FROM Users INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesterId
             WHERE Friendship.Friend_RequesteeId = :userId AND Friendship.Status_Code = 'request'";
     $pStatment = $myPdo->prepare($sql);
