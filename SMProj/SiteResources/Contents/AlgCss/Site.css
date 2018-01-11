@@ -63,9 +63,31 @@ input[name=btnLogin] {
     height: 800px;
 }
 
-.commentSection {
+.selectedThumbnail {
+    border: 1px solid blue;
+}
+
+.descriptionSection, .commentSection, .leaveCommentSection {
     border: 1px solid black;
     height: auto;
+    overflow: auto;
+}
+
+.descriptionSection {max-height: 150px;}
+.commentSection {max-height: 250px;}
+.leaveCommentSection {
+    border: none;
+    height: 125px;
+}
+.leaveCommentSection textarea {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.addCommentSection {}
+.addCommentSection input {
+    margin-top: 4%;
 }
 
 .filmStrip {
@@ -82,6 +104,7 @@ input[name=btnLogin] {
 
 .filmStrip .item {
     border: 1px solid black;
+    width: 100px;
 }
 
 /* Faizan's CSS Section*/

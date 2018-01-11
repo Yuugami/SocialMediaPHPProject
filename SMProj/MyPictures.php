@@ -21,7 +21,8 @@ $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
 <body>
     <div class="container">
         <h1>My Pictures</h1>
-        <select class="form-control" id="albums" name="albums">            
+        <form action="/" method="post"></form>
+        <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
             <?php
             foreach ($loggedInUsersAlbums as $anAlbum) {
                 if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
@@ -31,26 +32,73 @@ $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
                     echo "<option value='$anAlbum[Album_Id]'>$anAlbum[Title]</option>";
                 }
             }
+            $albumsPictures = getAlbumsPictures($_GET[albumID]);
+            foreach ($albumsPictures as $picture) {
+                if ($picture[Picture_Id] == $_GET[photoID]) {
+                    $selectedPicture = $picture;
+                }
+            }
             ?>
         </select>
-
         <div class="row">
             <h2 class="col-lg-8 col-lg-offset-3"><?php echo $selectedAlbum[Title]?></h2>
         </div>
         <div class="row">
             <div class="selectedPicture col-lg-8">
-                <div class="thePicture">Picture Goes Here</div>
-                <div class="filmStrip">                    <?php
+                <div class="thePicture"><img src="/Images/OwnerID/AlbumID/Original/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" /></div>
+                <div class="filmStrip">
+                    <?php
                     $index = 0;
-                    for ($i = 0; $i < 19; $i++)
+                    foreach ($albumsPictures as $picture)
                     {
-                    echo "<div class='item'><img id='$index' src='' alt='A Picture' /></div>";
-                    $index++;
+                        echo "<div class='item'><img id='$picture[Picture_Id]' src='/Images/OwnerID/AlbumID/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                        $index++;
                     }
                     ?>
                 </div>
             </div>
+            <div class="descriptionSection col-lg-4">
+                <?php echo "$selectedPicture[Description]"?>
+            </div>
             <div class="commentSection col-lg-4">Comments Goes Here</div>
+            <div class="leaveCommentSection col-lg-4"><textarea placeholder="Leave Comment..."></textarea></div>
+            <div class="addCommentSection col-lg-4">
+                <input type="submit" class="mb-2 btn btn-primary" name="name" value="Add Comment" />
+            </div>
         </div>
-    </div><?php include ("./CommonFiles/Footer.php"); ?>
+    </div>
+    <?php include ("./CommonFiles/Footer.php"); ?>
+    <script>
+        function reloadPage(albumID) {
+            document.location = 'MyPictures.php?albumID=' + albumID;
+        }
+
+        $(document).ready(function () {
+
+            $(".item img").click(function () {
+                var a = window.location.href;
+                var regex = "&photoID";
+                // If the photoID tag doesn't exist...
+                if (a.search(regex) == -1) {
+                    // Add one!
+                    document.location = a + "&photoID=" + $(this).attr("id");
+                }
+                else {
+                    // Otherwise remove it and add a new one.
+                    var b = a.search(regex);
+                    var whatToRemove = a.substr(b);
+                    a = a.replace(whatToRemove, "");
+                    document.location = a + "&photoID=" + $(this).attr("id");
+                }
+                
+                //var srcName = $(this).attr("src");
+                //var srcNameParts = srcName.split("/");
+                //var albumPicture = '/Images/OwnerID/AlbumID/Album/' + srcNameParts[3];
+                //$(".thePicture img").attr("src", albumPicture);
+                 
+                //$(".item").css("border-color", "black");
+                //$(this).parent().css("border-color", "blue");
+            });
+        });
+    </script>
 </body>
