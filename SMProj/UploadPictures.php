@@ -46,39 +46,46 @@ if (isset($_POST["submit"])) {
 
     if (isset($description)) {
         $description = trim($_POST["description"]);        
-    }    
+    }
+    
+    $album;
+    
+    $date = date("Y-m-d");
+    
+    for ($i = 0; $i < count($_FILES["file"]["tmp_name"]); $i++)
+    {
+        if ($_FILES["file"]["error"][$i] == 0)
+        {
+//            $path = savefile(ORIGINAL_PICTURES_DIR, $i);
+//
+//            $details = getimagesize($path);
+//
+//            if ($details && in_array($details[2], $supportedImageTypes))
+//            {
+//                resamplefile($path, ALBUM_PICTURES_DIR, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
+//                resamplefile($path, ALBUM_THUMBNAILS_DIR, THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT);
+                UploadPictureDataDb($album, $_FILES["file"]["name"][$i], $title, $description, $date);
+//            }
+//            else
+//            {
+//                $error = "Uploaded file is not of an accepted file type.";
+//                unlink($path);
+//            }
+        }
+        elseif ($_FILES["file"]["error"][$i] == 1)
+        {
+            $error = "Uploaded file is too large.";
+        }
+        elseif ($_FILES["file"]["error"][$i] == 4)
+        {
+            $error = "No upload file specified.";
+        }
+        else
+        {
+            $error = "Error occurred while uploading file. Please try again later.";
+        }        
+    }
 }
-
-//function UploadPictures($title, $description, $date, $ownerId, $accessibility) {
-
-// Return 0 if OwnerId doesnot exist
-// Return -1 if Accessibility_Code does not exist
-// Does Insert and returns AlbumId if successfull
-
-//    $myPdo = connectToDb();
-//
-//    $sql = 'SELECT UserId FROM Users WHERE UserId = :userId';
-//    $pStatment = $myPdo->prepare($sql);
-//    $pStatment->execute(array('userId' => $ownerId));
-//    $data = $pStatment->fetch();
-//    if(!$data){
-//        return 0;
-//    }
-//
-//    $sql = 'SELECT Accessibility_Code FROM Accessibility WHERE Accessibility_Code = :accessibility';
-//    $pStatment = $myPdo->prepare($sql);
-//    $pStatment->execute(array('accessibility' => $accessibility));
-//    $data = $pStatment->fetch();
-//    if(!$data){
-//        return -1;
-//    }
-//
-//    $sql = "INSERT INTO Album (Title, Description, Date_Updated, Owner_Id, Accessibility_Code) VALUES (:title, :description, :date, :ownerId, :accessibility)";
-//    $pStatment = $myPdo->prepare($sql);
-//    $pStatment->execute(array('title' => $title, 'description' => $description, 'date' => $date, 'ownerId' => $ownerId, 'accessibility' => $accessibility));
-//
-//    return $myPdo->lastInsertId();
-//}
 
 ?>
 <body>
@@ -100,7 +107,7 @@ if (isset($_POST["submit"])) {
                         <option value="" style="display:none">Please Select Album to Use</option>
                             <?php
                             foreach ($albumList as $eachalbum) {
-                                echo "<option value='", $eachalbum[Title], "'", isset($_POST["album"]) && $_POST["album"] == $eachalbum[Title] ? "selected='selected'" : "", ">", $eachalbum[Title], "</option>";
+                                echo "<option value='", $eachalbum["Album_Id"], "'", isset($_POST["album"]) && $_POST["album"] == $eachalbum[Title] ? "selected='selected'" : "", ">", $eachalbum[Title], "</option>";
                             }
                             ?>           
                     </select>
