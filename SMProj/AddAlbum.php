@@ -29,7 +29,11 @@ if ($_POST) {
     /* Section Two */
     if (!$error) {
         $time = date('Y-m-d');
-        CreateAlbum($_POST[title], $_POST[description], $time, $_SESSION[LoggedInUserId], $_POST[accessibility]);
+        $createdAlbumID = CreateAlbum($_POST[title], $_POST[description], $time, $_SESSION[LoggedInUserId], $_POST[accessibility]);
+        mkdir("Pictures/$createdAlbumID");
+        mkdir("Pictures/$createdAlbumID/Original");
+        mkdir("Pictures/$createdAlbumID/Album");
+        mkdir("Pictures/$createdAlbumID/Thumbnail");
     }
 }
 ?>
