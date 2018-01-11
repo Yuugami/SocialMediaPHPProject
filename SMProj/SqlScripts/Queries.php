@@ -207,10 +207,20 @@ function getFriendsList($UserId){
     // Name: ['UserId'], ['Name'], ['AlbumsShared']
 
     $myPdo = connectToDb();
+    //$sql = "SELECT Users.UserId, Users.UserName As Name, Friendship.Status_Code
+    //        FROM Users
+    //        INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId
+    //        WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted'";
     $sql = "SELECT Users.UserId, Users.UserName As Name, Friendship.Status_Code
             FROM Users
-            INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId
-            WHERE Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted'";
+            INNER JOIN Friendship ON Users.UserId = Friendship.Friend_RequesteeId OR Users.UserId = Friendship.Friend_RequesterId
+            WHERE
+            (
+				(Friendship.Friend_RequesterId = :userId AND Friendship.Status_Code = 'accepted')
+				OR
+				(Friendship.Friend_RequesterId != :userId AND Friendship.Friend_RequesteeId = :userId AND Friendship.Status_Code = 'accepted')
+            )
+            AND (UserId != :userId)";
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute( array('userId' => $UserId));
     $data = $pStatment->fetchAll();
@@ -296,9 +306,10 @@ function addFriend($RequesterId, $RequesteeId){
     // Returns 4 They becomes friends if Requester has already friend Request from Requestee
     // Returns 5 Requester's friend request is sent to Requestee
 
-    if(trim($RequesterId) == trim ($RequesteeId)){
+    if(trim($RequesterId) == trim($RequesteeId)){
         return 0; // You cannot send request to your self
     }
+
     $myPdo = connectToDb();
     $sql = "SELECT UserId, UserName AS Name FROM Users WHERE UserId = :requesteeId";
     $pStatment = $myPdo->prepare($sql);
