@@ -165,6 +165,10 @@ if (isset($_POST["submit"])) {
                 //$(".item").css("border-color", "black");
                 //$(this).parent().css("border-color", "blue");
             });
+
+            $(".selectedPicture").hover(function () {
+                $(".pictureIcons").toggle();
+            });
         });
     </script>
 </body>

@@ -69,7 +69,7 @@ if ($_POST) {
                     $friendsAlbumShared = htmlspecialchars($friend[AlbumsShared]);
                     echo <<<EOT
                     <tr>
-                        <td><a href='FriendsPictures.php?friendID=$friendsID'>$friendsName</a></td>
+                        <td><a href='FriendPictures.php?friendID=$friendsID'>$friendsName</a></td>
                         <td>$friendsAlbumShared</td>
                         <td>
                             <input type="checkbox" name="friend[]" value='$friendsID'/>
