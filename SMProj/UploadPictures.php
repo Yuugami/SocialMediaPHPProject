@@ -51,22 +51,22 @@ if (isset($_POST["submit"])) {
     $date = date("Y-m-d");
     
     // CHANGE TO DYNAMIC PATH
-    $temppathoriginal = "./Pictures/1/Original";
-    $temppathalbum = "./Pictures/1/Album";
-    $temppaththumbs = "./Pictures/1/Thumbnail";
+    $pathSaveOriginal = "./Pictures/".$album."/Original";
+    $pathSaveAlbum = "./Pictures/".$album."/Album";
+    $pathSaveThumb = "./Pictures/".$album."/Thumbnail";
     
     for ($i = 0; $i < count($_FILES["file"]["tmp_name"]); $i++)
     {
         if ($_FILES["file"]["error"][$i] == 0)
         {
-            $path = savefile($temppathoriginal, $i);
+            $path = savefile($pathSaveOriginal, $i);
 
             $details = getimagesize($path);
 
             if ($details && in_array($details[2], $supportedImageTypes))
             {
-                resamplefile($path, $temppathalbum, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
-                resamplefile($path, $temppaththumbs, THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT);
+                resamplefile($path, $pathSaveAlbum, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
+                resamplefile($path, $pathSaveThumb, THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT);
                 UploadPictureDataDb($album, $_FILES["file"]["name"][$i], $title, $description, $date);
             }
             else
