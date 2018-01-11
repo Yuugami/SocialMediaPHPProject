@@ -43,7 +43,7 @@ if ($_POST) {
         <br>
         <p class="text-center">
             Welcome <b><?php
-                        $Name = $_SESSION[LoggedInUserName];
+                        $Name = htmlspecialchars($_SESSION[LoggedInUserName]);
                         echo "$Name"; ?></b>! 
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
