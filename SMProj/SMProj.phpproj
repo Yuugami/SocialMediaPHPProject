@@ -18,6 +18,8 @@
   <ItemGroup>
     <Compile Include="AddAlbum.php" />
     <Compile Include="AddFriend.php" />
+    <Compile Include="CommonFiles\Classes.php" />
+    <Compile Include="CommonFiles\ConstantsAndSettings.php" />
     <Compile Include="CommonFiles\DirectorySettings.php" />
     <Compile Include="CommonFiles\Footer.php" />
     <Compile Include="CommonFiles\Functions.php" />
@@ -37,6 +39,10 @@
   <ItemGroup>
     <Folder Include="CommonFiles\" />
     <Folder Include="Pictures\" />
+    <Folder Include="Pictures\11\" />
+    <Folder Include="Pictures\11\Album\" />
+    <Folder Include="Pictures\11\Original\" />
+    <Folder Include="Pictures\11\Thumbnail\" />
     <Folder Include="SiteResources\" />
     <Folder Include="SiteResources\Contents\" />
     <Folder Include="SiteResources\Contents\AlgCss\" />

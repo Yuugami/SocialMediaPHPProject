@@ -70,7 +70,12 @@ $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
                     $name = getUserName($aComment[Author_Id]);
                     $name = $name[UserName];
                     echo "<span class='distinct'>$name ";
-                    echo "($aComment[Comment_Date]):</span> $aComment[Comment_Text]</p>";
+                    $date = $aComment[Comment_Date];
+                    $date = date_create_from_format('Y-m-d H:i:s', $date);
+                    $date = date_format($date, 'Y-m-d');
+                    echo "(";
+                    echo $date;
+                    echo "):</span> $aComment[Comment_Text]</p>";
                 }
                 ?>
             </div>
