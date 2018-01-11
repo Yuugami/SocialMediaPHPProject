@@ -19,9 +19,15 @@ if ($_GET) {
 
     $friendsUser = getUserName($_GET[friendID]);
     $friendsUser = $friendsUser[UserName];
+
+    if (!empty($friendsUser)) {
+        $_SESSION['friendYouAreVisiting'] = $friendsUser;
+        $_SESSION['friendIDYouAreVisiting'] = $_GET[friendID];
+        $friendsUser = $_SESSION['friendYouAreVisiting'];
+    }
 }
 
-$loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
+$loggedInUsersFriendsAlbums = SharedAlbums($_SESSION['friendIDYouAreVisiting']);
 
 // save comments to db
 $leavecomment = "";
@@ -50,11 +56,11 @@ if($_POST) {
 ?>
 <body>
     <div class="container">
-        <h1><?php echo $friendsUser?>'s Pictures</h1>
+        <h1><?php echo $_SESSION['friendYouAreVisiting']?>'s Pictures</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
                 <?php
-                foreach ($loggedInUsersAlbums as $anAlbum) {
+                foreach ($loggedInUsersFriendsAlbums as $anAlbum) {
                     if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
                         $albumTitle = htmlspecialchars($anAlbum[Title]);
                         $albumTitle = htmlspecialchars($albumTitle);
