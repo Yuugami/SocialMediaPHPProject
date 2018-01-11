@@ -16,7 +16,12 @@ if (!isset($_SESSION["LoggedInUserId"])) {
         <h1 class="text-center">My Friends</h1>
         <br>
         <p class="text-center">
-            Welcome <b><?php echo "$_SESSION[LoggedInUserName]"; ?></b>!
+            
+            Welcome <b>
+            <?php 
+            $Name = htmlspecialchars($_SESSION[LoggedInUserName]);
+            echo "$Name"; 
+            ?></b>!
             (Not you? Change users <a href="<?php echo $directoryPrefix; ?>/Logout.php">here</a>.)
         </p>
         <br>
@@ -38,10 +43,12 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                 $index = 0;
                 //var_dump($listOfFriends);
                 foreach ($listOfFriends as $friend) {
+                    $friendsName = htmlspecialchars($friend[Name]);
+                    $friendsAlbumShared = htmlspecialchars($friend[AlbumsShared]);
                     echo <<<EOT
                     <tr>
-                        <td>$friend[Name]</td>
-                        <td>$friend[AlbumsShared]</td>
+                        <td>$friendsName</td>
+                        <td>$friendsAlbumShared</td>
                         <td>
                             <input type="checkbox" name="friend$index" value="value$index" />
                         </td>
@@ -64,9 +71,10 @@ EOT;
                 $listOfRequests = getFriendsRequests($_SESSION["LoggedInUserId"]);
                 //var_dump($listOfRequests);
                 foreach ($listOfRequests as $request) {
+                    $RequestsName = htmlspecialchars($request[Name]);
                     echo <<<EOT
                     <tr>
-                        <td>$request[Name]</td>
+                        <td>$RequestsName</td>
                         <td>
                             <input type="checkbox" name="friend$index" value="value$index" />
                         </td>
