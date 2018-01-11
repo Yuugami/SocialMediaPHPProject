@@ -10,6 +10,15 @@ if (!isset($_SESSION["LoggedInUserId"])) {
     header("Location: Login.php?returnUrl=".urlencode($_SERVER['REQUEST_URI']));
     die();
 }
+
+if ($_POST) {
+    if ($_POST[Defriend]) {
+        $friendsToDelete = $_POST[friend];
+        foreach ($friendsToDelete as $goodByeFriend) {
+            deleteFriend($_SESSION["LoggedInUserId"], $goodByeFriend);
+        }
+    }
+}
 ?>
 <body>
     <div class="container">
@@ -48,13 +57,14 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                     $friendsAlbumShared = htmlspecialchars($friend[AlbumsShared]);
                     echo <<<EOT
                     <tr>
-                        <td><a href="FriendsPictures.php?friendID=$friendsId">$friendsName</a></td>
+                        <td><a href='FriendsPictures.php?friendID=$friendsID'>$friendsName</a></td>
                         <td>$friendsAlbumShared</td>
                         <td>
-                            <input type="checkbox" name="friend$index" value="value$index" />
+                            <input type="checkbox" name="friend[]" value='$friendsID'/>
                         </td>
                     </tr>
 EOT;
+                    $index++;
                 }
                 ?>
             </table>
@@ -95,4 +105,11 @@ EOT;
 
         </form>
     </div><?php include ("./CommonFiles/Footer.php"); ?>
+    <script>
+        $(document).ready(function () {
+            $("input[name=Defriend]").on("click", function () {
+                return confirm("The selected friends will be deleted!");
+            });
+        });
+    </script>
 </body>

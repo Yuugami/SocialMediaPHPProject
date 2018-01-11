@@ -302,3 +302,4 @@ __pycache__/
 SMProj/CommonFiles/DirectorySettings.php
 SMProj/SqlScripts/db_connection.ini
 SMProj/SqlScripts/testdb.php
+SMProj/Pictures/
