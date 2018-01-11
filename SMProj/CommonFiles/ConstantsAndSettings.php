@@ -1,9 +1,9 @@
 <?php
 
 // defines all constants used in application
-define(ORIGINAL_PICTURES_DIR, "./Pictures/OriginalPictures");
-define(ALBUM_PICTURES_DIR, "./Pictures/AlbumPictures");
-define(ALBUM_THUMBNAILS_DIR, "./Pictures/AlbumThumbnails");
+define(ORIGINAL_PICTURES_DIR, "./Pictures/Original");
+define(ALBUM_PICTURES_DIR, "./Pictures/Album");
+define(ALBUM_THUMBNAILS_DIR, "./Pictures/Thumbnail");
 
 define(IMAGE_MAX_WIDTH, 1024);
 define(IMAGE_MAX_HEIGHT, 800);

@@ -58,17 +58,19 @@ $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
                 </div>
             </div>
             <div class="descriptionSection col-lg-4">
-                <?php echo "$selectedPicture[Description]"?>
+                <?php echo "<p><b>Description:</b></p>";
+                echo "$selectedPicture[Description]"?>
             </div>
             <div class="commentSection col-lg-4">
                 <?php
                 $comments = getCommentsDb($selectedPicture[Picture_Id]);
+                echo "<p><b>Comments:</b></p>";
                 foreach ($comments as $aComment) {
                     echo "<p>";
                     $name = getUserName($aComment[Author_Id]);
                     $name = $name[UserName];
-                    echo "$name ";
-                    echo "($aComment[Comment_Date]): $aComment[Comment_Text]</p>";
+                    echo "<span class='distinct'>$name ";
+                    echo "($aComment[Comment_Date]):</span> $aComment[Comment_Text]</p>";
                 }
                 ?>
             </div>
