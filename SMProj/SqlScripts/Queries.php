@@ -3,7 +3,7 @@
 function connectToDb(){
     $dbConnection = parse_ini_file("db_connection.ini");
     extract($dbConnection);
-    return new PDO($dsn, $user, $password);;
+    return new PDO($dsn, $user, $password);
 }
 
 //----------------------------------- User Related Functions ---------------------------------
@@ -181,7 +181,7 @@ function getCommentsDb($PictureId){
     return $data;
 }
 
-function saveCommetsDb($Author_Id, $Picture_Id, $Comment_Text, $Comment_Date){
+function saveCommentsDb($Author_Id, $Picture_Id, $Comment_Text, $Comment_Date){
     $myPdo = connectToDb();
     $sql = "INSERT INTO Comments (Author_Id, Picture_Id, Comment_Text, Comment_Date) VALUES (:author_Id, :picture_Id, :comment_Text, :comment_Date)";
     $pStatment = $myPdo->prepare($sql);
