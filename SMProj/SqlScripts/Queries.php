@@ -132,6 +132,22 @@ function deleteAlbum($AlbumId) {
     $pStatment->execute( array('albumId' => $AlbumId));
 }
 
+function SharedAlbums($UserId){
+    // Returns:
+    // Album_Id
+    // Title
+    // Description
+    // Date_Updated
+    // Owner_Id
+    // Accessibility_Code
+    $myPdo = connectToDb();
+    $sql = "SELECT * FROM Album WHERE Album.Owner_Id = :userId AND Album.Accessibility_Code = 'shared'";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('userId' => $UserId));
+    $data = $pStatment->fetchAll();
+    return $data;
+}
+
 // Deletes a single picture
 function deletePictureFromDb($PictureId) {
     $myPdo = connectToDb();
