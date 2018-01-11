@@ -41,7 +41,7 @@ CREATE TABLE CST8257.Picture (
 	Title varchar(256) NOT NULL,
 	Description varchar(3000),
 	Date_Added date NOT NULL,
-	FOREIGN KEY (Album_Id) REFERENCES Album (Album_Id)
+	FOREIGN KEY (Album_Id) REFERENCES Album (Album_Id) ON DELETE CASCADE
 );
 
 CREATE TABLE CST8257.Comments (
@@ -51,7 +51,7 @@ CREATE TABLE CST8257.Comments (
 	Comment_Text varchar(3000) NOT NULL,
 	Comment_Date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (Author_Id) REFERENCES Users (UserId),
-	FOREIGN KEY (Picture_Id) REFERENCES Picture (Picture_Id)
+	FOREIGN KEY (Picture_Id) REFERENCES Picture (Picture_Id) ON DELETE CASCADE
 );
 
 CREATE TABLE CST8257.FriendshipStatus (
