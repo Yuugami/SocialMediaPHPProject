@@ -86,6 +86,14 @@ input[name=btnLogin] {
     font-size: 40px;
 }
 
+.gly-flip-horizontal {
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+}
+
 .descriptionSection, .commentSection, .leaveCommentSection {
     border: 1px solid black;
     height: auto;

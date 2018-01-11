@@ -67,7 +67,7 @@ if (isset($_POST["submit"])) {
             <div class="row">
                 <div class="selectedPicture col-lg-8">
                     <div class="thePicture">
-                        <img src="/Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
+                        <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
                     </div>
                     <div class="pictureIcons">
                         <a href="" id="rotateLeft">
@@ -120,10 +120,10 @@ if (isset($_POST["submit"])) {
                     foreach ($albumsPictures as $picture)
                     {
                         if ($picture[Picture_Id] == $selectedPicture[Picture_Id]) {
-                            echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='./Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
                         }
                         else {
-                            echo "<div class='item'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            echo "<div class='item'><img id='$picture[Picture_Id]' src='./Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
                         }
 
                         $index++;
