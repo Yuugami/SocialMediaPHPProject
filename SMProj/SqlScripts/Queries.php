@@ -120,6 +120,32 @@ function deleteAlbum($AlbumId) {
     $pStatment->execute( array('albumId' => $AlbumId) );
 }
 
+//---------------------------- Pictures functions -------------------------------------------
+
+function UploadPictureDataDb($Album_Id, $FileName, $Tite, $Description, $Date){
+    $myPdo = connectToDb();
+    $sql = "INSERT INTO Picture (Album_Id, FileName, Title, Description, Date_Added) "
+            . "VALUES (:albumId, :fileName, :title, :description, :date)";
+    $pStatment = $myPdo->prepare($sql);
+    $x = $pStatment->execute(array('albumId' => $Album_Id, 'fileName' => $FileName, 'title' => $Tite, 'description' => $Description, 'date' => $Date));
+}
+
+function getPicturesInfoDb($albumId){
+    // return the following:
+    // $data['Picture_Id']
+    // $data['Album_Id']
+    // $data['FileName']
+    // $data['Title']
+    // $data['Description']
+    // $data['Date_Added']
+    $myPdo = connectToDb();
+    $sql = "SELECT * FROM CST8257.Picture WHERE Album_Id = :albumId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('albumId' => $albumId));
+    $data = $pStatment->fetchAll();
+    return $data;
+}
+
 //---------------------------- My Friends Page Functions ------------------------------------
 function getFriendsList($UserId){
     // Returns an containing Friends UserId, Name & Count of Shared Albums
