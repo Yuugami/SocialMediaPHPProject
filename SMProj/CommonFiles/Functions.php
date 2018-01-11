@@ -277,7 +277,6 @@ function deletePicture($path) {
     unlink("." . ORIGINAL_PICTURES_DIR . "/" . $fileName);
     unlink("." . ALBUM_PICTURES_DIR . "/" . $fileName);
     unlink("." . ALBUM_THUMBNAILS_DIR . "/" . $fileName);
-    header("Refresh:0");
 }
 
 ?>

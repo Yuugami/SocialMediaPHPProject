@@ -99,9 +99,9 @@ if($_POST) {
             </select>
             <div class="row">
                 <h2 class="col-lg-8 col-lg-offset-3">
-                    <?php 
-                    $selectedAlbumTitle = htmlspecialchars($selectedAlbum[Title]);
-                    echo $selectedAlbumTitle ?>
+                    <?php
+                    $selectedPictureTitle = htmlspecialchars($selectedPicture[Title]);
+                    echo $selectedPictureTitle ?>
                 </h2>
             </div>
             <div class="row">
