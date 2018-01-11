@@ -20,11 +20,15 @@ if ($_POST) {
     }
 
     if ($_POST[Accept]) {
-        echo "yas";
+        foreach ($_POST[friend] as $friend) {
+            AcceptFriendRequest($_SESSION["LoggedInUserId"], $friend);
+        }
     }
 
     if ($_POST[Reject]) {
-        echo "malph";
+        foreach ($_POST[friend] as $friend) {
+            RejectFriendRequest($_SESSION["LoggedInUserId"], $friend);
+        }
     }
 }
 ?>
@@ -97,7 +101,7 @@ EOT;
                         <tr>
                             <td>$RequestsName</td>
                             <td>
-                                <input type="checkbox" name="friend[]" value="value$index" />
+                                <input type="checkbox" name="friend[]" value="$request[UserId]" />
                             </td>
                         </tr>
 EOT;
