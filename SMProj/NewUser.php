@@ -51,6 +51,8 @@ PHP Social Media Project
 
         if (empty($studentiderrormsg) && empty($nameerrormsg) && empty($phoneerrormsg) && empty($passworderrormsg) && empty($password2errormsg)) {
             NewUser($studentid, $name, $phone, $password);
+            $_SESSION["LoggedInUserId"] = $studentid;
+            $_SESSION["LoggedInUserName"] = $name;            
             header("Location: index.php");
         }
     }
