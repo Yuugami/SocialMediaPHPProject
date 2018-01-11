@@ -157,6 +157,21 @@ function getPicturesInfoDb($albumId){
     return $data;
 }
 
+function getCommetsDb($PictureId){
+    // Returns The following:
+    // $data['Comment_Id']
+    // $data['Author_Id']
+    // $data['Picture_Id']
+    // $data['Comment_Text']
+    // $data['Comment_Date']
+    $myPdo = connectToDb();
+    $sql = "SELECT * FROM CST8257.Comments WHERE Picture_Id = :pictureId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('pictureId' => $PictureId));
+    $data = $pStatment->fetchAll();
+    return $data;
+}
+
 //---------------------------- My Friends Page Functions ------------------------------------
 function getFriendsList($UserId){
     // Returns an containing Friends UserId, Name & Count of Shared Albums
