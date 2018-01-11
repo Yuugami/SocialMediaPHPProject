@@ -70,16 +70,18 @@ EOT;
                 <?php
                 $listOfRequests = getFriendsRequests($_SESSION["LoggedInUserId"]);
                 //var_dump($listOfRequests);
-                foreach ($listOfRequests as $request) {
-                    $RequestsName = htmlspecialchars($request[Name]);
-                    echo <<<EOT
-                    <tr>
-                        <td>$RequestsName</td>
-                        <td>
-                            <input type="checkbox" name="friend$index" value="value$index" />
-                        </td>
-                    </tr>
+                if ($listOfRequests != null) {
+                    foreach ($listOfRequests as $request) {
+                        $RequestsName = htmlspecialchars($request[Name]);
+                        echo <<<EOT
+                        <tr>
+                            <td>$RequestsName</td>
+                            <td>
+                                <input type="checkbox" name="friend$index" value="value$index" />
+                            </td>
+                        </tr>
 EOT;
+                    }                    
                 }
                 ?>
             </table>
