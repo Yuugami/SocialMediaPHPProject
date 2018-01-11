@@ -17,31 +17,8 @@ if ($_GET) {
     $fileName = $fileName[FileName];
     $path = "./Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
 
-    if ($_GET[action] == "rotateLeft") {
-        $direction = 90;
-        rotatePicture($path, $direction, $_GET[albumID]);
-    }
-
-    if ($_GET[action] == "rotateRight") {
-        $direction = 270;
-        rotatePicture($path, $direction, $_GET[albumID]);
-    }
-
-    if ($_GET[action] == "download") {
-        downloadPicture($path);
-    }
-
-    if ($_GET[action] == "delete") {
-        deletePictureFromDb($_GET[photoID]);
-        deletePicture($path);
-    }
-
-    if ($_GET[action]) {
-        $currentURL = $_SERVER[REQUEST_URI];
-        $whatToDelete = strpos($currentURL, "&action");
-        $newURL = substr_replace($currentURL,"", $whatToDelete);
-        header("Location: " . $newURL);
-    }
+    $friendsUser = getUserName($_GET[friendID]);
+    $friendsUser = $friendsUser[UserName];
 }
 
 $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
@@ -66,14 +43,14 @@ if (isset($_POST["submit"])) {
 if($_POST) {
     $postAlbumID = $_POST[albums];
     $postImageID = $_SESSION["theThumbLastClicked"];
-    header("Location: MyPictures.php?albumID=$postAlbumID&photoID=$postImageID");
+    header("Location: FriendPictures.php?albumID=$postAlbumID&photoID=$postImageID");
 }
 
 
 ?>
 <body>
     <div class="container">
-        <h1>My Pictures</h1>
+        <h1><?php echo $friendsUser?>'s Pictures</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
                 <?php
@@ -108,20 +85,6 @@ if($_POST) {
                 <div class="selectedPicture col-lg-8">
                     <div class="thePicture">
                         <img src="./Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo htmlspecialchars($selectedPicture[FileName]) ?>" alt="Picture Goes Here" />
-                    </div>
-                    <div class="pictureIcons">
-                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=rotateLeft" id="rotateLeft">
-                            <span class="glyphicon glyphicon-repeat gly-flip-horizontal"></span>
-                        </a>
-                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=rotateRight" id="rotateRight">
-                            <span class="glyphicon glyphicon-repeat"></span>
-                        </a>
-                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=download" id="download">
-                            <span class="glyphicon glyphicon-download-alt"></span>
-                        </a>
-                        <a href="<?php echo $_SERVER[REQUEST_URI]?>&action=delete" id="trash">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
                     </div>
                 </div>
                 <div class="descriptionSection col-lg-4">
@@ -177,7 +140,7 @@ if($_POST) {
     <?php include ("./CommonFiles/Footer.php"); ?>
     <script>
         function reloadPage(albumID) {
-            document.location = 'MyPictures.php?albumID=' + albumID;
+            document.location = 'FriendPictures.php?albumID=' + albumID;
         }
 
         $(document).ready(function () {
