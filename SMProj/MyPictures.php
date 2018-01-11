@@ -15,20 +15,32 @@ if ($_GET) {
     $selectedAlbum = getAnAlbum($_GET[albumID]);
     $fileName = getAPictureInfo($_GET[photoID]);
     $fileName = $fileName[FileName];
-    $path = "../Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
+    $path = "./Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
 
     if ($_GET[action] == "rotateLeft") {
+        $direction = 90;
+        rotatePicture($path, $direction, $_GET[albumID]);
     }
 
     if ($_GET[action] == "rotateRight") {
+        $direction = 270;
+        rotatePicture($path, $direction, $_GET[albumID]);
     }
 
     if ($_GET[action] == "download") {
+        downloadPicture($path);
     }
 
     if ($_GET[action] == "delete") {
         deletePictureFromDb($_GET[photoID]);
         deletePicture($path);
+    }
+
+    if ($_GET[action]) {
+        $currentURL = $_SERVER[REQUEST_URI];
+        $whatToDelete = strpos($currentURL, "&action");
+        $newURL = substr_replace($currentURL,"", $whatToDelete);
+        header("Location: " . $newURL);
     }
 }
 
@@ -50,6 +62,13 @@ if (isset($_POST["submit"])) {
         }
     }
 }
+
+if($_POST) {
+    $postAlbumID = $_POST[albums];
+    $postImageID = $_SESSION["theThumbLastClicked"];
+    header("Location: MyPictures.php?albumID=$postAlbumID&photoID=$postImageID");
+}
+
 
 ?>
 <body>
@@ -73,15 +92,16 @@ if (isset($_POST["submit"])) {
                 foreach ($albumsPictures as $picture) {
                     if ($picture[Picture_Id] == $_GET[photoID]) {
                         $selectedPicture = $picture;
+                        $_SESSION["theLastPickedPicture"] = $selectedPicture;
                     }
                 }
                 ?>
             </select>
             <div class="row">
                 <h2 class="col-lg-8 col-lg-offset-3">
-                    <?php 
-                    $selectedAlbumTitle = htmlspecialchars($selectedAlbum[Title]);
-                    echo $selectedAlbumTitle ?>
+                    <?php
+                    $selectedPictureTitle = htmlspecialchars($selectedPicture[Title]);
+                    echo $selectedPictureTitle ?>
                 </h2>
             </div>
             <div class="row">
