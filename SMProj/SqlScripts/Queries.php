@@ -172,6 +172,13 @@ function getCommentsDb($PictureId){
     return $data;
 }
 
+function saveCommetsDb($Author_Id, $Picture_Id, $Comment_Text, $Comment_Date){
+    $myPdo = connectToDb();
+    $sql = "INSERT INTO Comments (Author_Id, Picture_Id, Comment_Text, Comment_Date) VALUES (:author_Id, :picture_Id, :comment_Text, :comment_Date)";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute(array('author_Id' => $Author_Id, 'picture_Id' => $Picture_Id, 'comment_Text' => $Comment_Text, 'comment_Date' => $Comment_Date));
+}
+
 //---------------------------- My Friends Page Functions ------------------------------------
 function getFriendsList($UserId){
     // Returns an containing Friends UserId, Name & Count of Shared Albums
