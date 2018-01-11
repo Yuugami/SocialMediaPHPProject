@@ -87,6 +87,7 @@ if (isset($_POST["submit"])) {
                 </div>
                 <div class="commentSection col-lg-4">
                     <?php
+                    //$selectedPicture[Picture_Id] = 1;
                     $comments = getCommentsDb($selectedPicture[Picture_Id]);
                     echo "<p><b>Comments:</b></p>";
                     foreach ($comments as $aComment) {
