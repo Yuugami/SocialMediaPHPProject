@@ -58,9 +58,10 @@ if ($_GET[deleteAlbumID]) {
                 //var_dump($albumList);
                 foreach ($albumList as $album) {
                 $numOfPicInAlbum = countPicturesInAlbum($album[Album_Id]);
+                $albumTitle = htmlspecialchars($album[Title]);
                 echo <<< EOT
                 <tr>
-                <td id="$album[Album_Id]"><a href="MyPictures.php?albumID=$album[Album_Id]">$album[Title]</a></td>
+                <td id="$album[Album_Id]"><a href="MyPictures.php?albumID=$album[Album_Id]">$albumTitle</a></td>
                 <td>$album[Date_Updated]</td>
                 <td>$numOfPicInAlbum</td>
                 <td>
