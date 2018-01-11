@@ -85,6 +85,164 @@ function ValidateAlbum($album) {
     }
 }
 
+function savefile($destination, $picturenumber)
+{
+    if (!file_exists($destination))
+    {
+        mkdir($destination);
+    }
+
+    $temppath = $_FILES["pictures"]["tmp_name"][$picturenumber];
+    $path = $destination."/".$_FILES["pictures"]["name"][$picturenumber];
+
+    $pathinfo = pathinfo($path);
+    $directory = $pathinfo["directoryname"];
+    $filename = $pathinfo["filename"];
+    $extension = $pathinfo["extension"];
+
+    // make sure not to overwrite any existing files
+    $i = "";
+    while (file_exists($path))
+    {
+        $i++;
+        $path = $dir."/".$filename."_".$i.".".$extension;
+    }
+    move_uploaded_file($temppath, $path);
+
+    return $path;
+}
+
+function resamplefile($path, $destination, $maxwidth, $maxheight)
+{
+    if (!file_exists($destination))
+    {
+        mkdir($destination);
+    }
+    
+    $details = getimagesize($path);
+    
+    $originalresource = null;
+    
+    if ($details[2] == IMAGETYPE_JPEG)
+    {
+        $originalresource = imagecreatefromjpeg($path);
+    }
+    elseif ($details[2] == IMAGETYPE_PNG)
+    {
+        $originalresource = imagecreatefrompng($path);
+    }
+    elseif ($details[2] == IMAGETYPE_GIF)
+    {
+        $originalresource = imagecreatefromgif($path);
+    }
+    
+    $widthratio = $details[0] / $maxwidth;
+    $heightratio = $details[1] / $maxheight;
+    $ratio = max($widthratio, $heightratio);
+    
+    $newwidth = $details[0] / $ratio;
+    $newheight = $details[1] / $ratio;
+    
+    $newimage = imagecreatetruecolor($newwidth, $newheight);
+    
+    $success = imagecopyresampled($newimage, $originalresource, 0, 0, 0, 0, $newwidth, $newheight, $details[0], $details[1]);
+    
+    if (!$success)
+    {
+        imagedestroy($newimage);
+        imagedestroy($originalresource);
+        return "";
+    }
+    
+    $pathinfo = pathinfo($path);
+    $newpath = $destination."/".$pathinfo["filename"];
+    
+    if ($details[2] == IMAGETYPE_JPEG)
+    {
+        $newpath .= ".jpg";
+        $success = imagejpeg($newimage, $newpath, 100);
+    }
+    elseif ($details[2] == IMAGETYPE_PNG)
+    {
+        $newpath .= ".png";
+        $success = imagepng($newimage, $newpath, 0);
+    }
+    elseif ($details[2] == IMAGETYPE_GIF)
+    {
+        $newpath .= ".gif";
+        $success = imagegif($newimage, $newpath);
+    }
+    
+    imagedestroy($newimage);
+    imagedestroy($originalresource);
+    
+    if (!$success)
+    {
+        return "";
+    }
+    else
+    {
+        return $newpath;
+    }
+}
+
+function rotateimage($path, $degrees)
+{
+    $details = getimagesize($path);
+    
+    $originalresource = null;
+    
+    if ($details[2] == IMAGETYPE_JPEG)
+    {
+        $originalresource = imagecreatefromjpeg($path);
+    }
+    elseif ($details[2] == IMAGETYPE_PNG)
+    {
+        $originalresource = imagecreatefrompng($path);
+    }
+    elseif ($details[2] == IMAGETYPE_GIF)
+    {
+        $originalresource = imagecreatefromgif($path);
+    }
+    
+    $rotatedresource = imagerotate($originalresource, $degrees, 0);
+    
+    if ($details[2] == IMAGETYPE_JPEG)
+    {
+        $success = imagejpeg($rotatedresource, $path, 100);
+    }
+    elseif ($details[2] == IMAGETYPE_PNG)
+    {
+        $success = imagepng($rotatedresource, $path, 0);
+    }
+    elseif ($details[2] == IMAGETYPE_GIF)
+    {
+        $success = imagegif($rotatedresource, $path);
+    }
+    
+    imagedestroy($rotatedresource);
+    imagedestroy($originalresource);
+}
+
+function download($path)
+{
+    $name = basename($path);
+    $length = filesize($path);
+    
+    header("Content-Type: application/octet-stream");
+    header("Content-Disposition: attachment; filename = \"$name\"");
+    header("Content-Length: $length");
+    header("Content-Description: File Transfer");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate");
+    header("Pragma: private");
+    
+    ob_clean();
+    flush();
+    readfile($path);
+    flush();
+}
+
 // MyAlbums.php Functions
 
 function removeDirectory($path) {
