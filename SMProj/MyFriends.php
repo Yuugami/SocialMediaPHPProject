@@ -116,7 +116,7 @@ EOT;
                 ?>
             </table>
             <div class="form-group rows">
-                <input type="submit" name="Reject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" />
+                <input type="submit" name="Reject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" onclick="confirm('Are You Sure You Want to Delete The Selected Request(s)?')" />
                 <input type="submit" name="Accept" value="Accept Selected" class="col-lg-2 btn btn-primary pull-right" />
             </div>
 
