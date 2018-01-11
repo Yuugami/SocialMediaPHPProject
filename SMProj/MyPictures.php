@@ -17,76 +17,93 @@ if ($_GET) {
 
 $loggedInUsersAlbums = showAlbums($_SESSION["LoggedInUserId"]);
 
+// save comments to db
+$leavecomment = "";
+$date = date("Y-m-d");
+if ($_GET[photoID] != null)
+{
+    $pictureid = $_GET[photoID];
+}
+if (isset($_POST["submit"])) {
+    if (isset($leavecomment)) {
+        $leavecomment = trim($_POST["leavecomment"]);
+        if ($pictureid != null) {
+            saveCommentsDb($_SESSION["LoggedInUserId"], $pictureid, $leavecomment, $date);            
+        }
+    }
+}
+
 ?>
 <body>
     <div class="container">
         <h1>My Pictures</h1>
-        <form action="/" method="post"></form>
-        <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
-            <?php
-            foreach ($loggedInUsersAlbums as $anAlbum) {
-                if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
-                    $albumTitle = htmlspecialchars($anAlbum[Title]);
-                    echo "<option value='$anAlbum[Album_Id]' selected>$albumTitle</option>";
+        <form action="MyPictures.php" method="post">
+            <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
+                <?php
+                foreach ($loggedInUsersAlbums as $anAlbum) {
+                    if ($anAlbum[Album_Id] == $selectedAlbum[Album_Id]) {
+                        $albumTitle = htmlspecialchars($anAlbum[Title]);
+                        echo "<option value='$anAlbum[Album_Id]' selected>$albumTitle</option>";
+                    }
+                    else {
+                        $albumTitle = htmlspecialchars($anAlbum[Title]);
+                        echo "<option value='$anAlbum[Album_Id]'>$albumTitle</option>";
+                    }
                 }
-                else {
-                    $albumTitle = htmlspecialchars($anAlbum[Title]);
-                    echo "<option value='$anAlbum[Album_Id]'>$albumTitle</option>";
+                $albumsPictures = getAlbumsPictures($_GET[albumID]);
+                foreach ($albumsPictures as $picture) {
+                    if ($picture[Picture_Id] == $_GET[photoID]) {
+                        $selectedPicture = $picture;
+                    }
                 }
-            }
-            $albumsPictures = getAlbumsPictures($_GET[albumID]);
-            foreach ($albumsPictures as $picture) {
-                if ($picture[Picture_Id] == $_GET[photoID]) {
-                    $selectedPicture = $picture;
-                }
-            }
-            ?>
-        </select>
-        <div class="row">
-            <h2 class="col-lg-8 col-lg-offset-3"><?php echo $selectedAlbum[Title]?></h2>
-        </div>
-        <div class="row">
-            <div class="selectedPicture col-lg-8">
-                <div class="thePicture"><img src="/Images/OwnerID/AlbumID/Original/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" /></div>
-                <div class="filmStrip">
+                ?>
+            </select>
+            <div class="row">
+                <h2 class="col-lg-8 col-lg-offset-3"><?php echo $selectedAlbum[Title]?></h2>
+            </div>
+            <div class="row">
+                <div class="selectedPicture col-lg-8">
+                    <div class="thePicture"><img src="/Images/OwnerID/AlbumID/Original/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" /></div>
+                    <div class="filmStrip">
+                        <?php
+                        $index = 0;
+                        foreach ($albumsPictures as $picture)
+                        {
+                            echo "<div class='item'><img id='$picture[Picture_Id]' src='/Images/OwnerID/AlbumID/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                            $index++;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="descriptionSection col-lg-4">
+                    <?php echo "<p><b>Description:</b></p>";
+                    echo "$selectedPicture[Description]"?>
+                </div>
+                <div class="commentSection col-lg-4">
                     <?php
-                    $index = 0;
-                    foreach ($albumsPictures as $picture)
-                    {
-                        echo "<div class='item'><img id='$picture[Picture_Id]' src='/Images/OwnerID/AlbumID/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
-                        $index++;
+                    $comments = getCommentsDb($selectedPicture[Picture_Id]);
+                    echo "<p><b>Comments:</b></p>";
+                    foreach ($comments as $aComment) {
+                        echo "<p>";
+                        $name = getUserName($aComment[Author_Id]);
+                        $name = htmlspecialchars($name[UserName]);
+                        echo "<span class='distinct'>$name ";
+                        $date = $aComment[Comment_Date];
+                        $date = date_create_from_format('Y-m-d H:i:s', $date);
+                        $date = date_format($date, 'Y-m-d');
+                        echo "(";
+                        echo $date;
+                        $ComentText = htmlspecialchars($aComment[Comment_Text]);
+                        echo "):</span> $ComentText</p>";
                     }
                     ?>
                 </div>
+                <div class="leaveCommentSection col-lg-4"><textarea class="form-control" id="leavecomment" name="leavecomment" placeholder="Leave Comment..."></textarea></div>
+                <div class="addCommentSection col-lg-4">
+                    <input type="submit" class="mb-2 btn btn-primary" name="submit" value="Add Comment" />
+                </div>
             </div>
-            <div class="descriptionSection col-lg-4">
-                <?php echo "<p><b>Description:</b></p>";
-                echo "$selectedPicture[Description]"?>
-            </div>
-            <div class="commentSection col-lg-4">
-                <?php
-                $comments = getCommentsDb($selectedPicture[Picture_Id]);
-                echo "<p><b>Comments:</b></p>";
-                foreach ($comments as $aComment) {
-                    echo "<p>";
-                    $name = getUserName($aComment[Author_Id]);
-                    $name = htmlspecialchars($name[UserName]);
-                    echo "<span class='distinct'>$name ";
-                    $date = $aComment[Comment_Date];
-                    $date = date_create_from_format('Y-m-d H:i:s', $date);
-                    $date = date_format($date, 'Y-m-d');
-                    echo "(";
-                    echo $date;
-                    $ComentText = htmlspecialchars($aComment[Comment_Text]);
-                    echo "):</span> $ComentText</p>";
-                }
-                ?>
-            </div>
-            <div class="leaveCommentSection col-lg-4"><textarea placeholder="Leave Comment..."></textarea></div>
-            <div class="addCommentSection col-lg-4">
-                <input type="submit" class="mb-2 btn btn-primary" name="name" value="Add Comment" />
-            </div>
-        </div>
+        </form>    
     </div>
     <?php include ("./CommonFiles/Footer.php"); ?>
     <script>
