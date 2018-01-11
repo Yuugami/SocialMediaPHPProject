@@ -66,7 +66,9 @@ INSERT INTO Picture (Album_Id, FileName, Title, Description, Date_Added) VALUES
 
 #Comments
 INSERT INTO Comments (Author_Id, Picture_Id, Comment_Text, Comment_Date) VALUES 
-('0001', 1, '<script>alert(document.cookie);</script>', '2018-06-15'),
-('0002', 1, 'Test Comment 2', '2018-06-15'),
-('0001', 2, 'Test Comment 3', '2018-06-15'),
-('0002', 2, 'Test Comment 4', '2018-06-15');
+('0001', 1, '<script>alert(document.cookie);</script>', '2016-06-15'),
+('0002', 1, 'Test Comment 1', '2017-06-15'),
+('0001', 1, 'Test Comment 2', '2018-06-15'),
+('0002', 1, 'Test Comment 3', '2015-06-15'),
+('0001', 2, 'Test Comment 4', '2018-06-15'),
+('0002', 2, 'Test Comment 5', '2018-06-15');

@@ -178,6 +178,11 @@ function getPicturesInfoDb($albumId){
     return $data;
 }
 
+function sortFunction( $a, $b ) {
+    date_default_timezone_set('America/Toronto');
+    return strtotime($a["Comment_Date"]) - strtotime($b["Comment_Date"]);
+}
+
 function getCommentsDb($PictureId){
     // Returns The following:
     // $data['Comment_Id']
@@ -190,6 +195,7 @@ function getCommentsDb($PictureId){
     $pStatment = $myPdo->prepare($sql);
     $pStatment->execute(array('pictureId' => $PictureId));
     $data = $pStatment->fetchAll();
+    usort($data, "sortFunction");
     return $data;
 }
 
