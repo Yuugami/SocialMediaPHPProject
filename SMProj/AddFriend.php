@@ -24,7 +24,8 @@ if (!isset($_SESSION["LoggedInUserId"])) {
         if ($_POST) {
             echo "<p class='error' style='text-align: center'>";
             $code = addFriend($_SESSION["LoggedInUserId"], $_POST["id"]);
-
+            $requestee = getUserName($_POST["id"]);
+            $requestee = $requestee["UserName"];
             switch($code) {
                 case 0:
                     echo "You can't send a request to yourself!";
@@ -42,13 +43,13 @@ if (!isset($_SESSION["LoggedInUserId"])) {
                     echo "This user sent you a request as well! You guys are now friends!";
                     break;
                 case 5:
-                    echo "Request sent!";
+                    echo "Your request has been sent to $requestee.<br>Once $requestee accepts your request, you and $requestee will be friends and be able to view each other's shared albums.";
                     break;
                 default:
                     echo "If you get here, you're an actual shit.";
 
             }
-            echo "</p>";
+            echo "</p><br>";
         }
         ?>
         <form class="form-horizontal col-lg-offset-2" id="depositForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">

@@ -92,8 +92,8 @@ function savefile($destination, $picturenumber)
         mkdir($destination);
     }
 
-    $temppath = $_FILES["pictures"]["tmp_name"][$picturenumber];
-    $path = $destination."/".$_FILES["pictures"]["name"][$picturenumber];
+    $temppath = $_FILES["file"]["tmp_name"][$picturenumber];
+    $path = $destination."/".$_FILES["file"]["name"][$picturenumber];
 
     $pathinfo = pathinfo($path);
     $directory = $pathinfo["directoryname"];
@@ -184,63 +184,6 @@ function resamplefile($path, $destination, $maxwidth, $maxheight)
     {
         return $newpath;
     }
-}
-
-function rotateimage($path, $degrees)
-{
-    $details = getimagesize($path);
-    
-    $originalresource = null;
-    
-    if ($details[2] == IMAGETYPE_JPEG)
-    {
-        $originalresource = imagecreatefromjpeg($path);
-    }
-    elseif ($details[2] == IMAGETYPE_PNG)
-    {
-        $originalresource = imagecreatefrompng($path);
-    }
-    elseif ($details[2] == IMAGETYPE_GIF)
-    {
-        $originalresource = imagecreatefromgif($path);
-    }
-    
-    $rotatedresource = imagerotate($originalresource, $degrees, 0);
-    
-    if ($details[2] == IMAGETYPE_JPEG)
-    {
-        $success = imagejpeg($rotatedresource, $path, 100);
-    }
-    elseif ($details[2] == IMAGETYPE_PNG)
-    {
-        $success = imagepng($rotatedresource, $path, 0);
-    }
-    elseif ($details[2] == IMAGETYPE_GIF)
-    {
-        $success = imagegif($rotatedresource, $path);
-    }
-    
-    imagedestroy($rotatedresource);
-    imagedestroy($originalresource);
-}
-
-function download($path)
-{
-    $name = basename($path);
-    $length = filesize($path);
-    
-    header("Content-Type: application/octet-stream");
-    header("Content-Disposition: attachment; filename = \"$name\"");
-    header("Content-Length: $length");
-    header("Content-Description: File Transfer");
-    header("Expires: 0");
-    header("Cache-Control: must-revalidate");
-    header("Pragma: private");
-    
-    ob_clean();
-    flush();
-    readfile($path);
-    flush();
 }
 
 // MyAlbums.php Functions

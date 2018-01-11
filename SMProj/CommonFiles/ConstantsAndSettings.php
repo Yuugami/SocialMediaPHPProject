@@ -1,6 +1,8 @@
 <?php
 
 // defines all constants used in application
+// paths for UploadPictures.php located in UploadPictures.php
+// UNUSED
 define(ORIGINAL_PICTURES_DIR, "./Pictures/Original");
 define(ALBUM_PICTURES_DIR, "./Pictures/Album");
 define(ALBUM_THUMBNAILS_DIR, "./Pictures/Thumbnail");

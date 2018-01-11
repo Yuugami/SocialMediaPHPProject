@@ -48,29 +48,32 @@ if (isset($_POST["submit"])) {
         $description = trim($_POST["description"]);        
     }
     
-    $album;
-    
     $date = date("Y-m-d");
+    
+    // CHANGE TO DYNAMIC PATH
+    $pathSaveOriginal = "./Pictures/".$album."/Original";
+    $pathSaveAlbum = "./Pictures/".$album."/Album";
+    $pathSaveThumb = "./Pictures/".$album."/Thumbnail";
     
     for ($i = 0; $i < count($_FILES["file"]["tmp_name"]); $i++)
     {
         if ($_FILES["file"]["error"][$i] == 0)
         {
-//            $path = savefile(ORIGINAL_PICTURES_DIR, $i);
-//
-//            $details = getimagesize($path);
-//
-//            if ($details && in_array($details[2], $supportedImageTypes))
-//            {
-//                resamplefile($path, ALBUM_PICTURES_DIR, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
-//                resamplefile($path, ALBUM_THUMBNAILS_DIR, THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT);
+            $path = savefile($pathSaveOriginal, $i);
+
+            $details = getimagesize($path);
+
+            if ($details && in_array($details[2], $supportedImageTypes))
+            {
+                resamplefile($path, $pathSaveAlbum, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
+                resamplefile($path, $pathSaveThumb, THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT);
                 UploadPictureDataDb($album, $_FILES["file"]["name"][$i], $title, $description, $date);
-//            }
-//            else
-//            {
-//                $error = "Uploaded file is not of an accepted file type.";
-//                unlink($path);
-//            }
+            }
+            else
+            {
+                $error = "Uploaded file is not of an accepted file type.";
+                unlink($path);
+            }
         }
         elseif ($_FILES["file"]["error"][$i] == 1)
         {
