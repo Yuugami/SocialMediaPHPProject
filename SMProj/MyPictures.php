@@ -23,12 +23,13 @@ $date = date("Y-m-d");
 if ($_GET[photoID] != null)
 {
     $pictureid = $_GET[photoID];
+    $_SESSION["theThumbLastClicked"] = $pictureid;
 }
 if (isset($_POST["submit"])) {
     if (isset($leavecomment)) {
         $leavecomment = trim($_POST["leavecomment"]);
-        if ($pictureid != null) {
-            saveCommentsDb($_SESSION["LoggedInUserId"], $pictureid, $leavecomment, $date);            
+        if ($_SESSION["theThumbLastClicked"] != null && $leavecomment != "") {
+            saveCommentsDb($_SESSION["LoggedInUserId"], $_SESSION["theThumbLastClicked"], $leavecomment, $date);
         }
     }
 }
@@ -37,7 +38,7 @@ if (isset($_POST["submit"])) {
 <body>
     <div class="container">
         <h1>My Pictures</h1>
-        <form action="MyPictures.php" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <select class="form-control" id="albums" name="albums" onchange="reloadPage(this.value)">
                 <?php
                 foreach ($loggedInUsersAlbums as $anAlbum) {
@@ -59,18 +60,22 @@ if (isset($_POST["submit"])) {
                 ?>
             </select>
             <div class="row">
-                <h2 class="col-lg-8 col-lg-offset-3"><?php echo $selectedAlbum[Title]?></h2>
+                <h2 class="col-lg-8 col-lg-offset-3">
+                    <?php echo $selectedAlbum[Title]?>
+                </h2>
             </div>
             <div class="row">
                 <div class="selectedPicture col-lg-8">
-                    <div class="thePicture"><img src="/Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" /></div>
+                    <div class="thePicture">
+                        <img src="/Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
+                    </div>
                     <div class="filmStrip">
                         <?php
                         $index = 0;
                         foreach ($albumsPictures as $picture)
                         {
                             if ($picture[Picture_Id] == $selectedPicture[Picture_Id]) {
-                                echo "<div class='item selectedThumbnail'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
+                                echo "<div class='item selectedThumbnail'><img name='$picture[Picture_Id]' id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
                             }
                             else {
                                 echo "<div class='item'><img id='$picture[Picture_Id]' src='/Pictures/$selectedAlbum[Album_Id]/Thumbnail/$picture[FileName]' alt='A Picture $index' /></div>";
@@ -105,7 +110,9 @@ if (isset($_POST["submit"])) {
                     }
                     ?>
                 </div>
-                <div class="leaveCommentSection col-lg-4"><textarea class="form-control" id="leavecomment" name="leavecomment" placeholder="Leave Comment..."></textarea></div>
+                <div class="leaveCommentSection col-lg-4">
+                    <textarea class="form-control" id="leavecomment" name="leavecomment" placeholder="Leave Comment..."></textarea>
+                </div>
                 <div class="addCommentSection col-lg-4">
                     <input type="submit" class="mb-2 btn btn-primary" name="submit" value="Add Comment" />
                 </div>

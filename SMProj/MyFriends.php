@@ -18,6 +18,14 @@ if ($_POST) {
             deleteFriend($_SESSION["LoggedInUserId"], $goodByeFriend);
         }
     }
+
+    if ($_POST[Accept]) {
+        echo "yas";
+    }
+
+    if ($_POST[Reject]) {
+        echo "malph";
+    }
 }
 ?>
 <body>
@@ -73,6 +81,7 @@ EOT;
         </form>
 
         <form class="form-horizontal" id="friendRequestForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <p>Friend Requests:</p>
             <table class="table table-striped">
                 <thead class="thead-inverse">
                     <th>Name</th>
@@ -88,7 +97,7 @@ EOT;
                         <tr>
                             <td>$RequestsName</td>
                             <td>
-                                <input type="checkbox" name="friend$index" value="value$index" />
+                                <input type="checkbox" name="friend[]" value="value$index" />
                             </td>
                         </tr>
 EOT;
@@ -97,7 +106,7 @@ EOT;
                 ?>
             </table>
             <div class="form-group rows">
-                <input type="button" name="Reject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" />
+                <input type="submit" name="Reject" value="Reject Selected" class="col-lg-2 btn btn-primary ml-10px pull-right" />
                 <input type="submit" name="Accept" value="Accept Selected" class="col-lg-2 btn btn-primary pull-right" />
             </div>
 
