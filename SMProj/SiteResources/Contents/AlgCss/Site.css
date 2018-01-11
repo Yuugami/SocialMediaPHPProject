@@ -73,6 +73,19 @@ input[name=btnLogin] {
     align-content: center;
 }
 
+.selectedPicture:hover img {
+    opacity: 0.5;
+}
+
+.pictureIcons {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    display: none;
+    width: 100%;
+    font-size: 40px;
+}
+
 .descriptionSection, .commentSection, .leaveCommentSection {
     border: 1px solid black;
     height: auto;

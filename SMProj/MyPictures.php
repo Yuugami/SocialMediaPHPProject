@@ -69,7 +69,7 @@ if (isset($_POST["submit"])) {
                     <div class="thePicture">
                         <img src="/Pictures/<?php echo $selectedAlbum[Album_Id]?>/Album/<?php echo $selectedPicture[FileName]?>" alt="Picture Goes Here" />
                     </div>
-                    <!--<div class="pictureIcons">
+                    <div class="pictureIcons">
                         <a href="" id="rotateLeft">
                             <span class="glyphicon glyphicon-repeat gly-flip-horizontal"></span>
                         </a>
@@ -82,7 +82,7 @@ if (isset($_POST["submit"])) {
                         <a href="" id="trash">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
-                    </div>-->
+                    </div>
                 </div>
                 <div class="descriptionSection col-lg-4">
                     <?php echo "<p><b>Description:</b></p>";
