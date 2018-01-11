@@ -126,7 +126,7 @@ function deleteAlbum($AlbumId) {
     $myPdo = connectToDb();
     $sql = "DELETE FROM Album WHERE Album_Id = :albumId";
     $pStatment = $myPdo->prepare($sql);
-    $pStatment->execute( array('albumId' => $AlbumId) );
+    $pStatment->execute( array('albumId' => $AlbumId));
 }
 
 function getAlbumsPictures($AlbumId) {
@@ -138,6 +138,15 @@ function getAlbumsPictures($AlbumId) {
     $pStatment->execute( array('albumId' => $AlbumId));
     $data = $pStatment->fetchAll();
     return ($data);
+}
+
+function countPicturesInAlbum($AlbumId){
+    // Returns int number of rows
+    $myPdo = connectToDb();
+    $sql = "SELECT * FROM CST8257.Picture WHERE Album_Id = :albumId";
+    $pStatment = $myPdo->prepare($sql);
+    $pStatment->execute( array('albumId' => $AlbumId));
+    return $pStatment->rowCount();
 }
 
 //---------------------------- Pictures functions -------------------------------------------
