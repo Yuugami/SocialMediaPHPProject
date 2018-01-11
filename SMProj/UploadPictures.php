@@ -110,7 +110,8 @@ if (isset($_POST["submit"])) {
                         <option value="" style="display:none">Please Select Album to Use</option>
                             <?php
                             foreach ($albumList as $eachalbum) {
-                                echo "<option value='", $eachalbum["Album_Id"], "'", isset($_POST["album"]) && $_POST["album"] == $eachalbum[Title] ? "selected='selected'" : "", ">", $eachalbum[Title], "</option>";
+                                $albumTitle = htmlspecialchars($eachalbum[Title]);
+                                echo "<option value='", $eachalbum["Album_Id"], "'", isset($_POST["album"]) && $_POST["album"] == $eachalbum[Title] ? "selected='selected'" : "", ">", $albumTitle, "</option>";
                             }
                             ?>           
                     </select>
