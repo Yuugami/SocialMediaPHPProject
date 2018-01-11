@@ -63,6 +63,13 @@ if (isset($_POST["submit"])) {
     }
 }
 
+if($_POST) {
+    $postAlbumID = $_POST[albums];
+    $postImageID = $_SESSION["theThumbLastClicked"];
+    header("Location: MyPictures.php?albumID=$postAlbumID&photoID=$postImageID");
+}
+
+
 ?>
 <body>
     <div class="container">
@@ -85,6 +92,7 @@ if (isset($_POST["submit"])) {
                 foreach ($albumsPictures as $picture) {
                     if ($picture[Picture_Id] == $_GET[photoID]) {
                         $selectedPicture = $picture;
+                        $_SESSION["theLastPickedPicture"] = $selectedPicture;
                     }
                 }
                 ?>

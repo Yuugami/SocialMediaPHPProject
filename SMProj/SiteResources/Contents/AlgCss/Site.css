@@ -60,6 +60,7 @@ input[name=btnLogin] {
 .selectedPicture {
     position: relative;
     border: 1px solid black;
+    min-height: 20em;
     height: auto;
 }
 
