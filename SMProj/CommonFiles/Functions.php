@@ -199,11 +199,12 @@ function removeDirectory($path) {
 
 // MyPictures.php
 
-function rotatePicture($path, $direction) {
+function rotatePicture($path, $direction, $albumID) {
     $fileName = basename($path); // Name of FIle
-    $originalPath = ORIGINAL_PICTURES_DIR . '/' . $fileName; // Original Picture
-    $albumPath = ALBUM_PICTURES_DIR . '/' . $fileName;
-    $thumbPath = ALBUM_THUMBNAILS_DIR . '/' . $fileName;
+    $originalPath = $path; // Original Picture
+    $albumPath = "../Pictures/" . $albumID . "/Album/" . $fileName;
+    $thumbPath = "." . ALBUM_THUMBNAILS_DIR . '/' . $fileName;
+    $thumbPath = "../Pictures/" . $albumID ."/Thumbnail/" . $fileName;
     $pathInfoOriginal = pathinfo($originalPath); // Get ALL the info
     $extOriginal = $pathInfoOriginal['extension']; // Get the extension of that picture
 
@@ -250,13 +251,12 @@ function rotatePicture($path, $direction) {
     imagedestroy($albumType);
     imagedestroy($thumbType);
 
-    header("Location: MyPictures.php");
+    header("Refresh:0");
 }
 
 function downloadPicture($path) {
     $fileName = basename($path);
-    $originalPath = './img/OriginalPictures/' . $fileName;
-    $fileLength = filesize($originalPath);
+    $fileLength = filesize($path);
 
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename = \"$fileName\" ");
@@ -268,7 +268,7 @@ function downloadPicture($path) {
 
     ob_clean();
     flush();
-    readfile($originalPath);
+    readfile($path);
     flush();
 }
 
@@ -279,7 +279,7 @@ function deletePicture($path) {
     unlink("." . ORIGINAL_PICTURES_DIR . "/" . $fileName);
     unlink("." . ALBUM_PICTURES_DIR . "/" . $fileName);
     unlink("." . ALBUM_THUMBNAILS_DIR . "/" . $fileName);
-    header("Location: MyPictures.php");
+    header("Refresh:0");
 }
 
 ?>

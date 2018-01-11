@@ -15,15 +15,20 @@ if ($_GET) {
     $selectedAlbum = getAnAlbum($_GET[albumID]);
     $fileName = getAPictureInfo($_GET[photoID]);
     $fileName = $fileName[FileName];
-    $path = "../Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
+    $path = "./Pictures/" . $_GET[albumID] ."/Original/" . $fileName;
 
     if ($_GET[action] == "rotateLeft") {
+        $direction = 270;
+        rotatePicture($path, $direction, $_GET[albumID]);
     }
 
     if ($_GET[action] == "rotateRight") {
+        $direction = 90;
+        rotatePicture($path, $direction);
     }
 
     if ($_GET[action] == "download") {
+        downloadPicture($path);
     }
 
     if ($_GET[action] == "delete") {
